@@ -37,11 +37,11 @@ int main(void) {
 
     struct stat st;
 
-    char *pstr;
-    char line[BUFSIZ];  /* Buffer para acumular uma linha lida */
+    FILE *fstr;
 
     int i = 0;  /* Armazena o número de linhas lidas do arquivo */
-
+    char *pstr;
+    char line[BUFSIZ];  /* Buffer para acumular uma linha lida */
     char *file = "abastecimento_spin.csv";  /* String do nome do arquivo */
 
     if (stat(file, &st) == 0) {
@@ -49,7 +49,7 @@ int main(void) {
         printf("Number of records = %ld\n", (st.st_size / 36) - 1); /* Calcula o número de linhas */
     }
 
-    FILE *fstr = fopen(file, "r");  /* Abre arquivo para leitura ("r") */
+    fstr = fopen(file, "r");  /* Abre arquivo para leitura ("r") */
     if (!fstr) {
         perror("fopen");
         return EXIT_FAILURE;
