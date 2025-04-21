@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include "lib/stdpasi.h"
 
 #define NUM_RECORD  200
 
@@ -14,24 +15,11 @@ typedef struct {
     double total_amount[NUM_RECORD];
 } Nota;
 
-/* (Similar a um CONSTRUCTOR) Função para criar uma Nota  */
-Nota *criar_nota() {
-    Nota *nova_nota = (Nota *) malloc(sizeof(Nota));
-    if (nova_nota == NULL) {
-        perror("Falha ao alocar memória para 'nova_nota'");
-    }
-    return nova_nota;
-}
-
-/* (Similar a um METHOD) Função que calcula a quantidade de quilômetros */
-int total_odometer(Nota nota, int i) {
-    return nota.odometer[i] - nota.odometer[0];
-}
-
-/* (Similar a um METHOD) Função que calcula o total_amount */
-double total_amount(double liters, double unit_price) {
-    return liters * unit_price;
-}
+/* Prototypes */
+Nota *criar_nota();
+int total_odometer(Nota nota, int i);
+double total_amount(double liters, double unit_price);
+double final_amount(Nota *nota, int i);
 
 int main(void) {
 
@@ -45,7 +33,7 @@ int main(void) {
     char *file = "abastecimento_spin.csv";  /* String do nome do arquivo */
 
     if (stat(file, &st) == 0) {
-        printf("file_size = %ld\n", st.st_size);    /* Obtém o tamanho do arquivo */
+        printf("file_size = %ld bytes\n", st.st_size);    /* Obtém o tamanho do arquivo */
         printf("Number of records = %ld\n", (st.st_size / 36) - 1); /* Calcula o número de linhas */
     }
 
@@ -74,13 +62,52 @@ int main(void) {
 
     printf("Initial date = %s, Final date = %s\n", nota->date[0], nota->date[i - 1]);
 
-    printf("Initial odometer = %d, Final odometer = %d\n", nota->odometer[0], nota->odometer[i - 1]);
+    printf("Initial odometer = %d km, Final odometer = %d km\n", nota->odometer[0], nota->odometer[i - 1]);
     int odometer = total_odometer(*nota, i - 1);
-    printf("Total odometer= %d\n", odometer);
+    printf("Total odometer= %d km\n", odometer);
+
+    double total_amount = final_amount(nota, i);
+    printf("Total Amount = R$ %.2f\n", total_amount);
+
+    char *date1 = nota->date[0];
+    char *date2 = nota->date[i - 1];
+
+    int total_days = daysbtd(date1, date2);
+    printf("Total days = %d\n", total_days);
 
     /* Libera memória alocada */
     free(nota);
     fclose(fstr);
 
     return 0;
+}
+
+/* Functions */
+
+/* (Similar a um CONSTRUCTOR) Função para criar uma Nota  */
+Nota *criar_nota() {
+    Nota *nova_nota = (Nota *) malloc(sizeof(Nota));
+    if (nova_nota == NULL) {
+        perror("Falha ao alocar memória para 'nova_nota'");
+    }
+    return nova_nota;
+}
+
+/* (Similar a um METHOD) Função que calcula a quantidade de quilômetros */
+int total_odometer(Nota nota, int i) {
+    return nota.odometer[i] - nota.odometer[0];
+}
+
+/* (Similar a um METHOD) Função que calcula o total_amount */
+double total_amount(double liters, double unit_price) {
+    return liters * unit_price;
+}
+
+/* */
+double final_amount(Nota *nota, int i) {
+    double res = 0;
+    for (int r = 0; r < i; r++) {
+        res = res + nota->total_amount[r];
+    }
+    return res;
 }
