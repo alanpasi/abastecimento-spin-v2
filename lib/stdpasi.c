@@ -17,7 +17,8 @@
 
 #include "stdpasi.h"
 
-/*  daysbtd => DaysBetwenToDates
+/*  Function
+    daysbtd => DaysBetwenToDates
         Retorna (int) o número de dias entre duas datas (char) separadas
          por '-' Ex.: 2025-04-20.
 */
@@ -52,11 +53,44 @@ int daysbtd(char *pdate1, char *pdate2) {
     return ndays;
 }
 
-/* (Similar a um CONSTRUCTOR) Função para criar uma Invoice  */
-Invoice *get_invoice_data(void) {
+/* (Similar a um CONSTRUCTOR) Função
+    Cria uma Invoice
+*/
+Invoice *get_invoice_data(char *file, int *records) {
     Invoice *new_invoice = (Invoice *) malloc(sizeof(Invoice));
     if (new_invoice == NULL) {
         perror("Falha ao alocar memória para 'nova_nota'");
     }
+
+    FILE *fstr;
+
+    int i = 0;  /* Armazena o número de linhas lidas do arquivo (index) */
+    char *pstr;
+    char line[BUFSIZ];  /* Buffer para acumular uma linha lida */
+
+    fstr = fopen(file, "r");  /* Abre arquivo para leitura ("r") */
+    if (!fstr) {
+        perror("fopen");
+        return NULL;
+    }
+
+    /* Coleta todas as notas */
+    while (fgets(line, BUFSIZ, fstr) != NULL) {
+        pstr = strtok(line, ",");
+        strcpy(new_invoice->date[i], pstr);
+        pstr = strtok(NULL, ",");
+        new_invoice->odometer[i] = atoi(pstr);
+        pstr = strtok(NULL, ",");
+        new_invoice->unit_price[i] = atof(pstr);
+        pstr = strtok(NULL, ",");
+        new_invoice->liters[i] = atof(pstr);
+        pstr = strtok(NULL, ",");
+        new_invoice->total_amount[i] = atof(pstr);
+        i++;
+    }
+    *records = i - 1;   /* Define índice [0] a [36] => número de linhas '-1' */
+
+    fclose(fstr);   /* Fecha o arquivo */
+
     return new_invoice;
 }

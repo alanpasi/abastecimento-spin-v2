@@ -31,7 +31,9 @@ typedef struct {
 */
 int daysbtd(char *date1, char *date2);
 
-/* (Similar a um CONSTRUCTOR) Função para criar uma Invoice  */
-Invoice *get_invoice_data(void);
+/* (Similar a um CONSTRUCTOR) Função
+    Cria uma Invoice
+*/
+Invoice *get_invoice_data(char *file, int *records);
 
 #endif
