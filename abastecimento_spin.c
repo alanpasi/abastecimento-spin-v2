@@ -6,20 +6,19 @@
 
 #define NUM_RECORD  200
 
-/* struct da Nota */
-typedef struct {
-    char date[NUM_RECORD][11];  /* [ROW][COLUMN] => [Number of Items] [Size of Item] */
-    int odometer[NUM_RECORD];
-    double unit_price[NUM_RECORD];
-    double liters[NUM_RECORD];
-    double total_amount[NUM_RECORD];
-} Nota;
+/* struct da Invoice */
+// typedef struct {
+//     char date[NUM_RECORD][11];  /* [ROW][COLUMN] => [Number of Items] [Size of Item] */
+//     int odometer[NUM_RECORD];
+//     double unit_price[NUM_RECORD];
+//     double liters[NUM_RECORD];
+//     double total_amount[NUM_RECORD];
+// } Invoice;
 
 /* Prototypes */
-Nota *criar_nota();
-int total_odometer(Nota nota, int records);
+int total_odometer(Invoice invoice, int records);
 double total_amount(double liters, double unit_price);
-double final_amount(Nota *nota, int records);
+double final_amount(Invoice *invoice, int records);
 
 int main(void) {
 
@@ -43,40 +42,40 @@ int main(void) {
         return EXIT_FAILURE;
     }
 
-    Nota *nota = criar_nota();
+    Invoice *invoice = get_invoice_data();
 
     /* Coleta todas as notas */
     while (fgets(line, BUFSIZ, fstr) != NULL) {
         pstr = strtok(line, ",");
-        strcpy(nota->date[i], pstr);
+        strcpy(invoice->date[i], pstr);
         pstr = strtok(NULL, ",");
-        nota->odometer[i] = atoi(pstr);
+        invoice->odometer[i] = atoi(pstr);
         pstr = strtok(NULL, ",");
-        nota->unit_price[i] = atof(pstr);
+        invoice->unit_price[i] = atof(pstr);
         pstr = strtok(NULL, ",");
-        nota->liters[i] = atof(pstr);
+        invoice->liters[i] = atof(pstr);
         pstr = strtok(NULL, ",");
-        nota->total_amount[i] = atof(pstr);
+        invoice->total_amount[i] = atof(pstr);
         i++;
     }
 
-    printf("Initial date = %s, Final date = %s\n", nota->date[0], nota->date[i - 1]);
+    printf("Initial date = %s, Final date = %s\n", invoice->date[0], invoice->date[i - 1]);
 
-    printf("Initial odometer = %d km, Final odometer = %d km\n", nota->odometer[0], nota->odometer[i - 1]);
-    int odometer = total_odometer(*nota, i - 1);
+    printf("Initial odometer = %d km, Final odometer = %d km\n", invoice->odometer[0], invoice->odometer[i - 1]);
+    int odometer = total_odometer(*invoice, i - 1);
     printf("Total odometer= %d km\n", odometer);
 
-    double total_amount = final_amount(nota, i);
+    double total_amount = final_amount(invoice, i);
     printf("Total Amount = R$ %.2f\n", total_amount);
 
-    char *date1 = nota->date[0];
-    char *date2 = nota->date[i - 1];
+    char *date1 = invoice->date[0];
+    char *date2 = invoice->date[i - 1];
 
     int total_days = daysbtd(date1, date2);
     printf("Total days = %d\n", total_days);
 
     /* Libera memória alocada */
-    free(nota);
+    free(invoice);
     fclose(fstr);
 
     return 0;
@@ -84,18 +83,9 @@ int main(void) {
 
 /* Functions */
 
-/* (Similar a um CONSTRUCTOR) Função para criar uma Nota  */
-Nota *criar_nota() {
-    Nota *nova_nota = (Nota *) malloc(sizeof(Nota));
-    if (nova_nota == NULL) {
-        perror("Falha ao alocar memória para 'nova_nota'");
-    }
-    return nova_nota;
-}
-
 /* (Similar a um METHOD) Função que calcula a quantidade de quilômetros */
-int total_odometer(Nota nota, int records) {
-    return nota.odometer[records] - nota.odometer[0];
+int total_odometer(Invoice invoice, int records) {
+    return invoice.odometer[records] - invoice.odometer[0];
 }
 
 /* (Similar a um METHOD) Função que calcula o total_amount */
@@ -104,10 +94,10 @@ double total_amount(double liters, double unit_price) {
 }
 
 /* */
-double final_amount(Nota *nota, int records) {
+double final_amount(Invoice *invoice, int records) {
     double res = 0;
     for (int r = 0; r < records; r++) {
-        res = res + nota->total_amount[r];
+        res = res + invoice->total_amount[r];
     }
     return res;
 }

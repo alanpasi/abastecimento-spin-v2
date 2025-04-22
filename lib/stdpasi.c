@@ -10,6 +10,7 @@
 
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
@@ -49,4 +50,13 @@ int daysbtd(char *pdate1, char *pdate2) {
     ndays = (date2_seconds - date1_seconds) / ONE_DAY_IN_SEC;
 
     return ndays;
+}
+
+/* (Similar a um CONSTRUCTOR) Função para criar uma Invoice  */
+Invoice *get_invoice_data(void) {
+    Invoice *new_invoice = (Invoice *) malloc(sizeof(Invoice));
+    if (new_invoice == NULL) {
+        perror("Falha ao alocar memória para 'nova_nota'");
+    }
+    return new_invoice;
 }
