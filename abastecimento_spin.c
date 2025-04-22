@@ -17,9 +17,9 @@ typedef struct {
 
 /* Prototypes */
 Nota *criar_nota();
-int total_odometer(Nota nota, int i);
+int total_odometer(Nota nota, int records);
 double total_amount(double liters, double unit_price);
-double final_amount(Nota *nota, int i);
+double final_amount(Nota *nota, int records);
 
 int main(void) {
 
@@ -27,7 +27,7 @@ int main(void) {
 
     FILE *fstr;
 
-    int i = 0;  /* Armazena o número de linhas lidas do arquivo */
+    int i = 0;  /* Armazena o número de linhas lidas do arquivo (index) */
     char *pstr;
     char line[BUFSIZ];  /* Buffer para acumular uma linha lida */
     char *file = "abastecimento_spin.csv";  /* String do nome do arquivo */
@@ -94,8 +94,8 @@ Nota *criar_nota() {
 }
 
 /* (Similar a um METHOD) Função que calcula a quantidade de quilômetros */
-int total_odometer(Nota nota, int i) {
-    return nota.odometer[i] - nota.odometer[0];
+int total_odometer(Nota nota, int records) {
+    return nota.odometer[records] - nota.odometer[0];
 }
 
 /* (Similar a um METHOD) Função que calcula o total_amount */
@@ -104,9 +104,9 @@ double total_amount(double liters, double unit_price) {
 }
 
 /* */
-double final_amount(Nota *nota, int i) {
+double final_amount(Nota *nota, int records) {
     double res = 0;
-    for (int r = 0; r < i; r++) {
+    for (int r = 0; r < records; r++) {
         res = res + nota->total_amount[r];
     }
     return res;
