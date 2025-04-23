@@ -123,11 +123,20 @@ void resume(Invoice *invoice, int records) {
 
     char *date1 = result.initial_date;
     char *date2 = result.final_date;
-    int total_days = daysbtd(date1, date2);
+    result.total_days = daysbtd(date1, date2);
+    result.total_odometer = total_odometer(*invoice, records);
+    result.total_amount = total_amount(invoice, records);
+    result.km_per_day = (double)result.total_odometer / result.total_days;
+    result.amount_per_day = result.total_amount / result.total_days;
+    result.amount_per_km = result.total_amount / result.total_odometer;
 
     puts("*** Resumo ***");
     printf("Date: %s to %s\n", result.initial_date, result.final_date);
-    printf("Total days = %d\n", total_days);
+    printf("Total days = %d\n", result.total_days);
+    printf("Total odometer = %d km\n", result.total_odometer);
+    printf("km per day = %.1f\n", result.km_per_day);
+    printf("Total amount = R$ %.2f\n", result.total_amount);
+    printf("Amount per day = R$ %.2f\n", result.amount_per_day);
+    printf("Amount per km = R$ %.2f\n", result.amount_per_km);
 
-    // return result;
 }
