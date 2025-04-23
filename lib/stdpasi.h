@@ -36,4 +36,14 @@ int daysbtd(char *date1, char *date2);
 */
 Invoice *get_invoice_data(char *file, int *records);
 
+/* Function (Similar a um METHOD)
+    Função que calcula a quantidade de quilômetros
+*/
+int total_odometer(Invoice invoice, int records);
+
+/* Function
+    Função que soma o Valor Total
+*/
+double total_amount(Invoice *invoice, int records);
+
 #endif

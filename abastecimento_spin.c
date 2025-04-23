@@ -5,19 +5,11 @@
 
 #define NUM_RECORD  200
 
-/* Prototypes */
-int total_odometer(Invoice invoice, int records);
-double total_amount(double liters, double unit_price);
-double final_amount(Invoice *invoice, int records);
-
 int main(void) {
 
     struct stat st;
-
     Invoice *invoice;
-
     int records;
-
     char *file = "abastecimento_spin.csv";  /* String do nome do arquivo */
 
     if (stat(file, &st) == 0) {
@@ -33,8 +25,8 @@ int main(void) {
     int odometer = total_odometer(*invoice, records);
     printf("Total odometer= %d km\n", odometer);
 
-    double total_amount = final_amount(invoice, records);
-    printf("Total Amount = R$ %.2f\n", total_amount);
+    double amount = total_amount(invoice, records);
+    printf("Total Amount = R$ %.2f\n", amount);
 
     char *date1 = invoice->date[0];
     char *date2 = invoice->date[records];
@@ -46,25 +38,4 @@ int main(void) {
     free(invoice);
 
     return 0;
-}
-
-/* Functions */
-
-/* (Similar a um METHOD) Função que calcula a quantidade de quilômetros */
-int total_odometer(Invoice invoice, int records) {
-    return invoice.odometer[records] - invoice.odometer[0];
-}
-
-/* (Similar a um METHOD) Função que calcula o total_amount */
-double total_amount(double liters, double unit_price) {
-    return liters * unit_price;
-}
-
-/* */
-double final_amount(Invoice *invoice, int records) {
-    double res = 0;
-    for (int r = 0; r < records; r++) {
-        res = res + invoice->total_amount[r];
-    }
-    return res;
 }

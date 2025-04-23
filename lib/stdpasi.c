@@ -7,7 +7,6 @@
             Variáveis
             Constantes
             Funções
-
 */
 
 #include <stdio.h>
@@ -19,8 +18,8 @@
 
 /*  Function
     daysbtd => DaysBetwenToDates
-        Retorna (int) o número de dias entre duas datas (char) separadas
-         por '-' Ex.: 2025-04-20.
+    Retorna (int) o número de dias entre duas datas (char) separadas por '-'.
+    Eg. daysbtd("1957-03-04", "2023-07-23");
 */
 int daysbtd(char *pdate1, char *pdate2) {
     struct tm d1, d2;
@@ -53,13 +52,16 @@ int daysbtd(char *pdate1, char *pdate2) {
     return ndays;
 }
 
-/* (Similar a um CONSTRUCTOR) Função
-    Cria uma Invoice
+/* Function (Similar a um CONSTRUCTOR)
+    Cria uma Invoice e coleta os dados do arquivo db (csv)
 */
 Invoice *get_invoice_data(char *file, int *records) {
     Invoice *new_invoice = (Invoice *) malloc(sizeof(Invoice));
     if (new_invoice == NULL) {
         perror("Falha ao alocar memória para 'nova_nota'");
+    } else {
+        printf("Endereço de 'new_invoice' = %p\n", new_invoice);
+        printf("sizeof(Invoice) = %ld\n", sizeof(Invoice));
     }
 
     FILE *fstr;
@@ -88,9 +90,27 @@ Invoice *get_invoice_data(char *file, int *records) {
         new_invoice->total_amount[i] = atof(pstr);
         i++;
     }
-    *records = i - 1;   /* Define índice [0] a [36] => número de linhas '-1' */
+    *records = i - 1;   /* Define índice [0] a [i - 1] => número de linhas '-1' */
 
     fclose(fstr);   /* Fecha o arquivo */
 
     return new_invoice;
+}
+
+/* Function (Similar a um METHOD)
+    Função que calcula a quantidade de quilômetros
+*/
+int total_odometer(Invoice invoice, int records) {
+    return invoice.odometer[records] - invoice.odometer[0];
+}
+
+/* Function
+    Função que soma o Valor Total
+*/
+double total_amount(Invoice *invoice, int records) {
+    double res = 0;
+    for (int r = 0; r < records; r++) {
+        res = res + invoice->total_amount[r];
+    }
+    return res;
 }
