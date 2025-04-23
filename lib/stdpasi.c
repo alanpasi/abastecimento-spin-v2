@@ -22,7 +22,7 @@
     Eg. daysbtd("1957-03-04", "2023-07-23");
 */
 int daysbtd(char *pdate1, char *pdate2) {
-    struct tm d1, d2;
+    struct tm d1 = {0}, d2 = {0};
     int ndays;
 
     char *pstr;
