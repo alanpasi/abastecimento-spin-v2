@@ -3,3 +3,4 @@ a.out
 .gdb_history
 build/
 .cache/clangd/index/
+link_abastecimento_spin

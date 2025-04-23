@@ -11,3 +11,6 @@ make -C build /* Executa as instruções contidas nos arquivos de build gerados 
 ```
 build/bin/abastecimento_spin /* Executar o programa
 ```
+
+Struct
+https://g.co/gemini/share/34613cee281d

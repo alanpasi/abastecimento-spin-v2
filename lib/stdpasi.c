@@ -58,10 +58,7 @@ int daysbtd(char *pdate1, char *pdate2) {
 Invoice *get_invoice_data(char *file, int *records) {
     Invoice *new_invoice = (Invoice *) malloc(sizeof(Invoice));
     if (new_invoice == NULL) {
-        perror("Falha ao alocar memória para 'nova_nota'");
-    } else {
-        printf("Endereço de 'new_invoice' = %p\n", new_invoice);
-        printf("sizeof(Invoice) = %ld\n", sizeof(Invoice));
+        perror("Falha ao alocar memória para '*new_invoice'");
     }
 
     FILE *fstr;
@@ -108,9 +105,29 @@ int total_odometer(Invoice invoice, int records) {
     Função que soma o Valor Total
 */
 double total_amount(Invoice *invoice, int records) {
-    double res = 0;
+    double result = 0;
     for (int r = 0; r < records; r++) {
-        res = res + invoice->total_amount[r];
+        result = result + invoice->total_amount[r];
     }
-    return res;
+    return result;
+}
+
+/* Function
+    Apresenta o resumo das Invoices
+*/
+void resume(Invoice *invoice, int records) {
+    Resume result;
+    /* Coleta informações */
+    strcpy(result.initial_date, invoice->date[0]);
+    strcpy(result.final_date, invoice->date[records]);
+
+    char *date1 = result.initial_date;
+    char *date2 = result.final_date;
+    int total_days = daysbtd(date1, date2);
+
+    puts("*** Resumo ***");
+    printf("Date: %s to %s\n", result.initial_date, result.final_date);
+    printf("Total days = %d\n", total_days);
+
+    // return result;
 }

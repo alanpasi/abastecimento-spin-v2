@@ -25,6 +25,18 @@ typedef struct {
     double total_amount[NUM_RECORD];
 } Invoice;
 
+/* struct Resume */
+typedef struct {
+    char initial_date[11];
+    char final_date[11];
+    int total_days;
+    int total_odometer;
+    double total_amount;
+    double amount_per_day;
+    double amount_per_km;
+    double km_per_day;
+} Resume;
+
 /*  daysbtd => DaysBetwenToDates
     Retorna (int) o número de dias entre duas datas (char) separadas por '-'.
     Eg. daysbtd("1957-03-04", "2023-07-23");
@@ -45,5 +57,10 @@ int total_odometer(Invoice invoice, int records);
     Função que soma o Valor Total
 */
 double total_amount(Invoice *invoice, int records);
+
+/* Function
+    Apresenta o resumo das Invoices
+*/
+void resume(Invoice *invoice, int records);
 
 #endif
