@@ -8,6 +8,7 @@
 
 int main(void) {
 
+    /* Define o locale para "pt_BR" (português do Brasil) */
     setlocale(LC_ALL, "pt_BR.UTF8");
 
     struct stat st;
