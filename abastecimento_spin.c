@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <locale.h>
-#include "lib/stdpasi.h"
+#include "stdpasi.h"
 
 #define NUM_RECORD  200
 
