@@ -132,11 +132,11 @@ void resume(Invoice *invoice, int records) {
 
     puts("*** Resumo ***");
     printf("Date: %s to %s\n", result.initial_date, result.final_date);
-    printf("Total days = %d\n", result.total_days);
-    printf("Total odometer = %d km\n", result.total_odometer);
-    printf("km per day = %.1f\n", result.km_per_day);
-    printf("Total amount = R$ %.2f\n", result.total_amount);
-    printf("Amount per day = R$ %.2f\n", result.amount_per_day);
-    printf("Amount per km = R$ %.2f\n", result.amount_per_km);
+    printf("Total days = %'d\n", result.total_days);
+    printf("Total odometer = %'d km\n", result.total_odometer);
+    printf("km per day = %'.1f\n", result.km_per_day);
+    printf("Total amount = R$ %'.2f\n", result.total_amount);
+    printf("Amount per day = R$ %'.2f\n", result.amount_per_day);
+    printf("Amount per km = R$ %'.2f\n", result.amount_per_km);
 
 }
