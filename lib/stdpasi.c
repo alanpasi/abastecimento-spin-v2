@@ -126,9 +126,11 @@ void resume(Invoice *invoice, int records) {
     result.total_days = daysbtd(date1, date2);
     result.total_odometer = total_odometer(*invoice, records);
     result.total_amount = total_amount(invoice, records);
+    result.total_liter = total_liters(invoice, records);
     result.km_per_day = (double)result.total_odometer / result.total_days;
     result.amount_per_day = result.total_amount / result.total_days;
     result.amount_per_km = result.total_amount / result.total_odometer;
+    result.km_per_liter = result.total_odometer / result.total_liter;
 
     puts("*** Resumo ***");
     printf("Date: %s to %s\n", result.initial_date, result.final_date);
@@ -138,5 +140,17 @@ void resume(Invoice *invoice, int records) {
     printf("Total amount = R$ %'.2f\n", result.total_amount);
     printf("Amount per day = R$ %'.2f\n", result.amount_per_day);
     printf("Amount per km = R$ %'.2f\n", result.amount_per_km);
+    printf("km per liter = %.2f\n", result.km_per_liter);
 
+}
+
+/* Function
+    Soma total de litros
+*/
+double total_liters(Invoice *invoice, int records) {
+    double result = 0;
+    for (int r = 0; r < records; r++) {
+        result = result + invoice->liters[r];
+    }
+    return result;
 }

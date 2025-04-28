@@ -32,9 +32,11 @@ typedef struct {
     int total_days;
     int total_odometer;
     double total_amount;
+    double total_liter;
     double amount_per_day;
     double amount_per_km;
     double km_per_day;
+    double km_per_liter;
 } Resume;
 
 /*  daysbtd => DaysBetwenToDates
@@ -62,5 +64,10 @@ double total_amount(Invoice *invoice, int records);
     Apresenta o resumo das Invoices
 */
 void resume(Invoice *invoice, int records);
+
+/* Function
+    Soma total de litros
+*/
+double total_liters(Invoice *invoice, int records);
 
 #endif
