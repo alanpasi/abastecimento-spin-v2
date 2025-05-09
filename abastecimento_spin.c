@@ -14,11 +14,11 @@ int main(void) {
     }
     invoice_data->record_count = 0; // Inicializa contador de registros
 
-    printf("Call function read_db()!!!\n");
     read_db(invoice_data);
-    printf("Após read_db(), invoice_data->record_count = %d\n", invoice_data->record_count);
 
     listInvoiceData(invoice_data);
+
+    printf("Número de registros = %d\n", invoice_data->record_count);
 
     resume(invoice_data, invoice_data->record_count);
 

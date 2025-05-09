@@ -152,7 +152,7 @@ double total_liters(Invoice *invoice, int record_count) {
 }
 
 /* Function
-    Lê db */
+    Inicializa db e retorna número de registros*/
 int read_db(Invoice *invoice_data) {
     sqlite3 *db;
     int rc;
@@ -180,7 +180,7 @@ int read_db(Invoice *invoice_data) {
     sqlite3_free(err_msg);
     sqlite3_close(db);
 
-    return 0;
+    return invoice_data->record_count;
 }
 
 /* Function

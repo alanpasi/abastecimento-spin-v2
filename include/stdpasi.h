@@ -67,7 +67,7 @@ void resume(Invoice *, int);
 double total_liters(Invoice *invoice, int records);
 
 /* Function
-    Inicializa db */
+    Inicializa db e retorna número de registros*/
 int read_db(Invoice *);
 
 /* Function
