@@ -1,14 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
-// #include <locale.h>
 
 #include "stdpasi.h"
 
 int main(void) {
-
-    /* Define o locale para "pt_BR" (português do Brasil) */
-    // setlocale(LC_ALL, "pt_BR.UTF8");
 
     // Aloca memória para struct Invoice
     Invoice *invoice_data = malloc(sizeof(Invoice));
