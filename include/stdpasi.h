@@ -60,7 +60,7 @@ double total_amount(Invoice *invoice, int records);
 
 /* Function
     Apresenta o resumo das Invoices */
-void resume(Invoice *invoice, int records);
+void resume(Invoice *, int);
 
 /* Function
     Soma total de litros */

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
-#include <locale.h>
+// #include <locale.h>
 
 #include "stdpasi.h"
 
@@ -20,8 +20,11 @@ int main(void) {
 
     printf("Call function read_db()!!!\n");
     read_db(invoice_data);
+    printf("Após read_db(), invoice_data->record_count = %d\n", invoice_data->record_count);
 
     listInvoiceData(invoice_data);
+
+    resume(invoice_data, invoice_data->record_count);
 
     /* Libera memória alocada */
     free(invoice_data);

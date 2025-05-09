@@ -95,58 +95,17 @@ int daysbtd(char *pdate1, char *pdate2) {
     return ndays;
 }
 
-/* Function (Similar a um CONSTRUCTOR)
-    Cria uma Invoice e coleta os dados do arquivo db (csv) */
-Invoice *get_invoice_data(char *file, int *records) {
-    Invoice *new_invoice = (Invoice *) malloc(sizeof(Invoice));
-    if (new_invoice == NULL) {
-        perror("Falha ao alocar memória para '*new_invoice'");
-    }
-
-    FILE *fstr;
-
-    int i = 0;  /* Armazena o número de linhas lidas do arquivo (index) */
-    char *pstr;
-    char line[BUFSIZ];  /* Buffer para acumular uma linha lida */
-
-    fstr = fopen(file, "r");  /* Abre arquivo para leitura ("r") */
-    if (!fstr) {
-        perror("fopen");
-        return NULL;
-    }
-
-    /* Coleta todas as notas */
-    while (fgets(line, BUFSIZ, fstr) != NULL) {
-        pstr = strtok(line, ",");
-        strcpy(new_invoice->date[i], pstr);
-        pstr = strtok(NULL, ",");
-        new_invoice->odometer[i] = atoi(pstr);
-        pstr = strtok(NULL, ",");
-        new_invoice->unit_price[i] = atof(pstr);
-        pstr = strtok(NULL, ",");
-        new_invoice->liters[i] = atof(pstr);
-        pstr = strtok(NULL, ",");
-        new_invoice->total_amount[i] = atof(pstr);
-        i++;
-    }
-    *records = i - 1;   /* Define índice [0] a [i - 1] => número de linhas '-1' */
-
-    fclose(fstr);   /* Fecha o arquivo */
-
-    return new_invoice;
-}
-
 /* Function (Similar a um METHOD)
     Função que calcula a quantidade de quilômetros */
-int total_odometer(Invoice invoice, int records) {
-    return invoice.odometer[records] - invoice.odometer[0];
+int total_odometer(Invoice invoice, int record_count) {
+    return invoice.odometer[record_count - 1] - invoice.odometer[0];
 }
 
 /* Function
     Função que soma o Valor Total */
-double total_amount(Invoice *invoice, int records) {
+double total_amount(Invoice *invoice, int record_count) {
     double result = 0;
-    for (int r = 0; r < records; r++) {
+    for (int r = 0; r < record_count; r++) {
         result = result + invoice->total_amount[r];
     }
     return result;
@@ -154,18 +113,18 @@ double total_amount(Invoice *invoice, int records) {
 
 /* Function
     Apresenta o resumo das Invoices */
-void resume(Invoice *invoice, int records) {
-    Resume result;
+void resume(Invoice *invoice, int record_count) {
+    Resume result = {0};
     /* Coleta informações */
     strcpy(result.initial_date, invoice->date[0]);
-    strcpy(result.final_date, invoice->date[records]);
+    strcpy(result.final_date, invoice->date[record_count - 1]);
 
     char *date1 = result.initial_date;
     char *date2 = result.final_date;
     result.total_days = daysbtd(date1, date2);
-    result.total_odometer = total_odometer(*invoice, records);
-    result.total_amount = total_amount(invoice, records);
-    result.total_liter = total_liters(invoice, records);
+    result.total_odometer = total_odometer(*invoice, record_count);
+    result.total_amount = total_amount(invoice, record_count);
+    result.total_liter = total_liters(invoice, record_count);
     result.km_per_day = (double)result.total_odometer / result.total_days;
     result.amount_per_day = result.total_amount / result.total_days;
     result.amount_per_km = result.total_amount / result.total_odometer;
@@ -184,9 +143,9 @@ void resume(Invoice *invoice, int records) {
 
 /* Function
     Soma total de litros */
-double total_liters(Invoice *invoice, int records) {
+double total_liters(Invoice *invoice, int record_count) {
     double result = 0;
-    for (int r = 0; r < records; r++) {
+    for (int r = 0; r < record_count; r++) {
         result = result + invoice->liters[r];
     }
     return result;
