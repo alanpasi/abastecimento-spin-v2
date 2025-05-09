@@ -2,32 +2,29 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <locale.h>
-#include "stdpasi.h"
 
-#define NUM_RECORD  200
+#include "stdpasi.h"
 
 int main(void) {
 
     /* Define o locale para "pt_BR" (português do Brasil) */
-    setlocale(LC_ALL, "pt_BR.UTF8");
+    // setlocale(LC_ALL, "pt_BR.UTF8");
 
-    struct stat st;
-    Invoice *invoice;
-    int records;
-    char *file = "abastecimento_spin.csv";  /* String do nome do arquivo */
-
-    if (stat(file, &st) == 0) {
-        printf("file_size = %'ld bytes\n", st.st_size);    /* Obtém o tamanho do arquivo */
-        printf("Number of records = %'ld\n", (st.st_size / 36) - 1); /* Calcula o número de linhas */
+    // Aloca memória para struct Invoice
+    Invoice *invoice_data = malloc(sizeof(Invoice));
+    if (invoice_data == NULL) {
+        fprintf(stderr, "Falha ao alocar memória para struct Invoice");
+        return 1;
     }
+    invoice_data->record_count = 0; // Inicializa contador de registros
 
-    invoice = get_invoice_data(file, &records);
+    printf("Call function read_db()!!!\n");
+    read_db(invoice_data);
 
-    /* Mostra resumo geral */
-    resume(invoice, records);
+    listInvoiceData(invoice_data);
 
     /* Libera memória alocada */
-    free(invoice);
+    free(invoice_data);
 
     return 0;
 }
