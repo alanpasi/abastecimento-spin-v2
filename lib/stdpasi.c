@@ -114,6 +114,7 @@ double total_amount(Invoice *invoice, int record_count) {
 /* Function
     Apresenta o resumo das Invoices */
 void resume(Invoice *invoice, int record_count) {
+    setlocale(LC_ALL, "pt_BR.UTF8");
     Resume result = {0};
     /* Coleta informações */
     strcpy(result.initial_date, invoice->date[0]);
@@ -195,4 +196,45 @@ void listInvoiceData(const Invoice *invoice_data) {
         printf("Quantity: %.2f\n", invoice_data->liters[i]);
         printf("Amount: %.2f\n", invoice_data->total_amount[i]);
     }
+}
+
+/* Function
+    Cria a mainPage*/
+int mainPage(Invoice invoice_data) {
+
+    unsigned int option = 0;
+
+    // Sequência de escape ANSI para limpar a tela e posicionar o cursor no topo
+    printf("\033[H\033[J");
+
+    printf("========== Abastecimento da Spin ==========\n");
+    printf("\tNúmero de registros = %d\n", invoice_data.record_count);
+    printf("\t1 - Inserir\n");
+    printf("\t2 - Listar\n");
+    printf("\t3 - Resumo\n");
+    printf("\t4 - Sair\n");
+
+    printf("Selecione uma opção: ");
+    scanf("%d", &option);
+
+    switch ((unsigned)option) {
+        case INSERT:
+            // TO_DO
+            printf("**** INSERT ****\n");
+            break;
+        case LIST:
+            listInvoiceData(&invoice_data);
+            break;
+        case RESUME:
+            resume(&invoice_data, invoice_data.record_count);
+            break;
+        case QUIT:
+            // TO_DO
+            printf("**** QUIT ****\n");
+            break;
+        default:
+        printf("Digite uma opção válida!!!\n");
+    }
+
+    return 0;
 }

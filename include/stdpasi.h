@@ -41,22 +41,25 @@ typedef struct {
     double km_per_liter;
 } Resume;
 
+typedef enum {
+    INSERT = 1,
+    LIST,
+    RESUME,
+    QUIT
+} MenuOption;
+
 /*  daysbtd => DaysBetwenToDates
     Retorna (int) o número de dias entre duas datas (char) separadas por '-'.
     Eg. daysbtd("1957-03-04", "2023-07-23"); */
-int daysbtd(char *date1, char *date2);
-
-/* (Similar a um CONSTRUCTOR) Função
-    Cria uma Invoice */
-Invoice *get_invoice_data(char *file, int *records);
+int daysbtd(char *, char *);
 
 /* Function (Similar a um METHOD)
     Função que calcula a quantidade de quilômetros */
-int total_odometer(Invoice invoice, int records);
+int total_odometer(Invoice, int);
 
 /* Function
     Função que soma o Valor Total */
-double total_amount(Invoice *invoice, int records);
+double total_amount(Invoice *, int);
 
 /* Function
     Apresenta o resumo das Invoices */
@@ -64,7 +67,7 @@ void resume(Invoice *, int);
 
 /* Function
     Soma total de litros */
-double total_liters(Invoice *invoice, int records);
+double total_liters(Invoice *, int);
 
 /* Function
     Inicializa db e retorna número de registros*/
@@ -73,5 +76,9 @@ int read_db(Invoice *);
 /* Function
     Lista invoices lidas do db */
 void listInvoiceData(const Invoice *);
+
+/* Function
+    Cria a mainPage*/
+int mainPage(Invoice);
 
 #endif
