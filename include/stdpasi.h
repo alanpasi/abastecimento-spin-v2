@@ -41,6 +41,7 @@ typedef struct {
     double km_per_liter;
 } Resume;
 
+/* Menu options */
 typedef enum {
     INSERT = 1,
     LIST,
@@ -75,7 +76,7 @@ int read_db(Invoice *);
 
 /* Function
     Lista invoices lidas do db */
-void listInvoiceData(const Invoice *);
+void listInvoiceData(Invoice *);
 
 /* Function
     Cria a mainPage*/

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
 #include "stdpasi.h"
 
@@ -14,6 +15,10 @@ int main(void) {
     invoice_data->record_count = 0; // Inicializa contador de registros
 
     read_db(invoice_data);
+
+    /* Atenção!!! Usar esta função somente após a leitura dos dados no SQLite3.
+        Se usar antes, ocorre o truncamento do valor em campo REAL */
+    setlocale(LC_ALL, "pt_BR.UTF8");
 
     mainPage(*invoice_data);
 

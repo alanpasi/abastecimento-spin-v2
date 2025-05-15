@@ -1,0 +1,11 @@
+[
+  {
+    "adapter": "GDB",
+    "label": "abastecimento_spin (GDB)",
+    "program": "/home/alanpasi/dev/C_Language/Projects/abastecimento_spin_v2/build/bin/abastecimento_spin",
+    "cwd": "/home/alanpasi/dev/C_Language/Projects/abastecimento_spin_v2",
+    "args": [],
+    "env": {},
+    "stop_on_entry": true
+  }
+]

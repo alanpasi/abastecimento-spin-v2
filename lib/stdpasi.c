@@ -12,7 +12,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include <locale.h>
 
 #include <sqlite3.h>
 
@@ -114,7 +113,7 @@ double total_amount(Invoice *invoice, int record_count) {
 /* Function
     Apresenta o resumo das Invoices */
 void resume(Invoice *invoice, int record_count) {
-    setlocale(LC_ALL, "pt_BR.UTF8");
+
     Resume result = {0};
     /* Coleta informações */
     strcpy(result.initial_date, invoice->date[0]);
@@ -186,8 +185,8 @@ int read_db(Invoice *invoice_data) {
 
 /* Function
     Lista invoices lidas do db */
-void listInvoiceData(const Invoice *invoice_data) {
-    setlocale(LC_ALL, "pt_BR.UTF8");
+void listInvoiceData(Invoice *invoice_data) {
+
     for (int i = 0; i < invoice_data->record_count; i++) {
         printf("\nRegistro [%d] \n", i + 1);
         printf("Data: %s\n", invoice_data->date[i]);
@@ -202,7 +201,7 @@ void listInvoiceData(const Invoice *invoice_data) {
     Cria a mainPage*/
 int mainPage(Invoice invoice_data) {
 
-    unsigned int option = 0;
+    unsigned int option = 2;
 
     // Sequência de escape ANSI para limpar a tela e posicionar o cursor no topo
     printf("\033[H\033[J");
