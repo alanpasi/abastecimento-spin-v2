@@ -14,7 +14,7 @@
 
 #define ONE_DAY_IN_SEC 86400 // 1 dia em segundos => 60 * 60 * 24
 
-#define NUM_RECORD  200 // Número de invoices
+#define NUM_RECORD  400 // Número de invoices
 #define DATE_LEN 11 // 10 caracteres para data + 1 para o terminador nulo
 
 /* struct da Invoice */
@@ -56,19 +56,19 @@ int daysbtd(char *, char *);
 
 /* Function (Similar a um METHOD)
     Função que calcula a quantidade de quilômetros */
-int total_odometer(Invoice, int);
+int total_odometer(Invoice *);
 
 /* Function
     Função que soma o Valor Total */
-double total_amount(Invoice *, int);
+double total_amount(Invoice *);
 
 /* Function
     Apresenta o resumo das Invoices */
-void resume(Invoice *, int);
+void resume(Invoice *);
 
 /* Function
     Soma total de litros */
-double total_liters(Invoice *, int);
+double total_liters(Invoice *);
 
 /* Function
     Inicializa db e retorna número de registros*/
@@ -80,6 +80,10 @@ void listInvoiceData(Invoice *);
 
 /* Function
     Cria a mainPage*/
-int mainPage(Invoice);
+int mainPage(Invoice *);
+
+/* Function
+    Adiciona invoice */
+int add_invoice(Invoice *);
 
 #endif
