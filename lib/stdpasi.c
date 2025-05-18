@@ -275,17 +275,16 @@ int add_invoice(Invoice *invoice) {
     }
 
     // Entrada de dados
-    printf("\nEntre a data (aaaa/mm/dd): ");
+    printf("\nEntre a data (ex. aaaa/mm/dd): ");
     scanf("%s*c", date);
-    printf("Entre odometer: ");
+    printf("Entre odometer (ex. 116000): ");
     scanf("%d", &odometer);
-    printf("Entre o preço/litro: ");
+    printf("Entre o preço/litro (ex. 6,19): ");
     scanf("%lf", &price);
-    printf("Entre o quantidade de litros: ");
+    printf("Entre o quantidade de litros (ex. 51,2): ");
     scanf("%lf", &liters);
-    printf("Entre o valor da nota: ");
+    printf("Entre o valor da nota (ex. 312,42): ");
     scanf("%lf", &amount);
-
 
     // Create a SQL query
     sql_query = "INSERT INTO notas (date, odometer, price, liters, amount) VALUES (?, ?, ?, ?, ?);";
