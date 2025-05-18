@@ -258,11 +258,11 @@ int add_invoice(Invoice *invoice) {
     sqlite3_stmt *stmt;
 
 // Dados a serem inseridos (usando variáveis)
-    char date[DATE_LEN] = "2025/05/18";
-    unsigned int odometer = 136000;
-    double price = 6.19;
-    double liters = 51.1;
-    double amount = 350.05;
+    char date[DATE_LEN];
+    unsigned int odometer = 0;
+    double price = 0.0;
+    double liters = 0.0;
+    double amount = 0.0;
 
     rc = sqlite3_open(db_name, &db);
 
@@ -273,6 +273,19 @@ int add_invoice(Invoice *invoice) {
     } else {
         fprintf(stdout, "db <%s> aberto com sucesso!\n", db_name);
     }
+
+    // Entrada de dados
+    printf("\nEntre a data (aaaa/mm/dd): ");
+    scanf("%s*c", date);
+    printf("Entre odometer: ");
+    scanf("%d", &odometer);
+    printf("Entre o preço/litro: ");
+    scanf("%lf", &price);
+    printf("Entre o quantidade de litros: ");
+    scanf("%lf", &liters);
+    printf("Entre o valor da nota: ");
+    scanf("%lf", &amount);
+
 
     // Create a SQL query
     sql_query = "INSERT INTO notas (date, odometer, price, liters, amount) VALUES (?, ?, ?, ?, ?);";

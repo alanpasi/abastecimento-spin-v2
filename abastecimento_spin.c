@@ -19,7 +19,7 @@ int main(void) {
 
     // Atenção!!! Usar a função setlocale() somente após a leitura dos dados no SQLite3.
     // Se usar antes, ocorre o truncamento do valor em campo 'REAL'
-    setlocale(LC_ALL, "pt_BR.UTF8");
+    // setlocale(LC_ALL, "pt_BR.UTF8");
 
     mainPage(invoice);
 
