@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <locale.h>
 
+#include "init_gtk.h"
 #include "stdpasi.h"
 
-int main(void) {
+int main(int argc, char *argv[]) {
 
     // Aloca memória para struct Invoice
     Invoice *invoice = malloc(sizeof(Invoice));
@@ -21,6 +22,8 @@ int main(void) {
     // Se usar antes, ocorre o truncamento do valor em campo 'REAL'
     setlocale(LC_ALL, "pt_BR.UTF8");
 
+    // Inicia GtkApplicationWindow
+    init_gtk(argc, argv);
     // mainPage(invoice);
 
     // Libera memória alocada

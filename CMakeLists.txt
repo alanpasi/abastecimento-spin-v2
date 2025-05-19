@@ -6,31 +6,29 @@ project("Abastecimento_Spin_v2"	  # Project name
     LANGUAGES C
 )
 
-# Variáveis do projeto
-set(EXEC_NAME "abastecimento_spin")
-set(SOURCE_NAME "abastecimento_spin.c")
-set(LIB_SOURCE_NAME "lib/stdpasi.c")
-
-# Configurações de compilação
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_BUILD_TYPE Debug)
-
-# Configurações específicas do compilador
-if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE -Wall -std=c17")
-    # Use c17 ao invés de c23 para maior compatibilidade
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
-elseif(MSVC)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4")
-endif()
-
-# Diretórios de saída
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
-# Inclusão de diretórios de cabeçalho
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+# Encontra o pacote GTK4 usando PkgConfig
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK4 REQUIRED gtk4)
+pkg_check_modules(SQLITE3 REQUIRED sqlite3) # Encontra o SQLite3
 
-# Definição do executável
-add_executable(${EXEC_NAME} ${SOURCE_NAME} ${LIB_SOURCE_NAME})
-target_link_libraries(${EXEC_NAME} -lsqlite3)
+# Define onde estão os arquivos de cabeçalho
+include_directories(include ${GTK4_INCLUDE_DIRS} ${SQLITE3_INCLUDE_DIRS}) # Adiciona includes do SQLite3
+
+# Cria a biblioteca estática "stdpasi"
+add_library(stdpasi STATIC
+    lib/stdpasi.c
+    lib/init_gtk.c # Adiciona init_gtk.c à biblioteca
+)
+
+# Cria o executável "abastecimento_spin"
+add_executable(abastecimento_spin abastecimento_spin.c)
+
+# Vincula o executável à biblioteca "stdpasi", GTK4 e SQLite3
+target_link_libraries(abastecimento_spin stdpasi ${GTK4_LIBRARIES} ${SQLITE3_LIBRARIES}) # Vincula com SQLite3
+
+# Adiciona as flags de compilação do GTK4 e SQLite3
+target_compile_options(abastecimento_spin PRIVATE ${GTK4_CFLAGS_OTHER} ${SQLITE3_CFLAGS_OTHER})
