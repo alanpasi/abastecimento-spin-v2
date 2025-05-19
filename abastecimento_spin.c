@@ -21,7 +21,7 @@ int main(void) {
     // Se usar antes, ocorre o truncamento do valor em campo 'REAL'
     setlocale(LC_ALL, "pt_BR.UTF8");
 
-    mainPage(invoice);
+    // mainPage(invoice);
 
     // Libera memória alocada
     free(invoice);
