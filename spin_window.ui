@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.96.1 -->
+<interface>
+  <!-- interface-name spin_window.ui -->
+  <requires lib="gtk" version="4.18"/>
+  <object class="GtkApplicationWindow" id="window">
+    <child>
+      <object class="GtkGrid" id="grid1">
+        <property name="column-homogeneous">True</property>
+        <property name="row-homogeneous">True</property>
+        <child>
+          <object class="GtkLabel" id="label_date">
+            <layout>
+              <property name="column">0</property>
+              <property name="column-span">3</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry_date">
+            <layout>
+              <property name="column">0</property>
+              <property name="column-span">3</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

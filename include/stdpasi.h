@@ -20,19 +20,19 @@
 /* struct da Invoice */
 typedef struct {
     char date[NUM_RECORD][DATE_LEN];  /* [ROW][COLUMN] => [Number of Items] [Size of Item] */
-    unsigned int odometer[NUM_RECORD];
+    unsigned odometer[NUM_RECORD];
     double unit_price[NUM_RECORD];
     double liters[NUM_RECORD];
     double total_amount[NUM_RECORD];
-    unsigned int record_count;
+    unsigned record_count;
 } Invoice;
 
 /* struct Resume */
 typedef struct {
     char initial_date[DATE_LEN];
     char final_date[DATE_LEN];
-    unsigned int total_days;
-    unsigned int total_odometer;
+    unsigned total_days;
+    unsigned total_odometer;
     double total_amount;
     double total_liter;
     double amount_per_day;

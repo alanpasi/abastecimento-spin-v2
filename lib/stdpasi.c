@@ -144,7 +144,7 @@ void resume(Invoice *invoice) {
     printf("Total amount = R$ %'.2f\n", resume.total_amount);
     printf("Amount per day = R$ %'.2f\n", resume.amount_per_day);
     printf("Amount per km = R$ %'.2f\n", resume.amount_per_km);
-    printf("km per liter = %.2f\n", resume.km_per_liter);
+    printf("km per liter = %'.2f\n", resume.km_per_liter);
 }
 
 /* Function
@@ -199,10 +199,10 @@ void listInvoiceData(Invoice *invoice) {
     for (int i = 0; i < invoice->record_count; i++) {
         printf("\nRegistro [%d] \n", i + 1);
         printf("Data: %s\n", invoice->date[i]);
-        printf("Odometer: %d\n", invoice->odometer[i]);
-        printf("Price: %.2f\n", invoice->unit_price[i]);
-        printf("Liters: %.1f\n", invoice->liters[i]);
-        printf("Amount: %.2f\n", invoice->total_amount[i]);
+        printf("Odometer: %'d km\n", invoice->odometer[i]);
+        printf("Price: R$ %'.2f\n", invoice->unit_price[i]);
+        printf("Liters: %'.1f L\n", invoice->liters[i]);
+        printf("Amount: R$ %'.2f\n", invoice->total_amount[i]);
     }
 }
 
