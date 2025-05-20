@@ -60,22 +60,22 @@ static void activate(GApplication *app, gpointer user_data) {
 
     entry_odometer = GTK_WIDGET(gtk_builder_get_object(builder, "entry_odometer"));
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_odometer));
-    sprintf(str_value, "%d", invoice->odometer[invoice->record_count - 1]);
+    snprintf(str_value, sizeof(str_value), "%d", invoice->odometer[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     entry_price = GTK_WIDGET(gtk_builder_get_object(builder, "entry_price"));
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_price));
-    sprintf(str_value, "%.2f", invoice->unit_price[invoice->record_count - 1]);
+    snprintf(str_value, sizeof(str_value), "%.2f", invoice->unit_price[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     entry_liters = GTK_WIDGET(gtk_builder_get_object(builder, "entry_liters"));
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_liters));
-    sprintf(str_value, "%.1f", invoice->liters[invoice->record_count - 1]);
+    snprintf(str_value, sizeof(str_value), "%.1f", invoice->liters[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     entry_amount = GTK_WIDGET(gtk_builder_get_object(builder, "entry_amount"));
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_amount));
-    sprintf(str_value, "%.2f", invoice->total_amount[invoice->record_count - 1]);
+    snprintf(str_value, sizeof(str_value), "%.2f", invoice->total_amount[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     // Cria um GtkSeparator
