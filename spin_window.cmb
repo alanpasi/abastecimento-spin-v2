@@ -2,5 +2,5 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <!-- Created with Cambalache 0.96.1 -->
 <cambalache-project version="0.96.0" target_tk="gtk-4.0">
-  <ui filename="spin_window.ui" sha256="a8a00a0210cc7e33c6deedcb766ff0d76193c9bd704e7698278001f08defd3ef"/>
+  <ui filename="spin_window.ui" sha256="08d674ecfab5246fa2326f4eb5f61067e17d38d509a1e38be3f006e6297c3617"/>
 </cambalache-project>

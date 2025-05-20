@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     setlocale(LC_ALL, "pt_BR.UTF8");
 
     // Inicia GtkApplicationWindow
-    init_gtk(argc, argv);
+    init_gtk(argc, argv, invoice);
     // mainPage(invoice);
 
     // Libera memória alocada
