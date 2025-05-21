@@ -257,7 +257,7 @@ int add_invoice(Invoice *invoice) {
     char *sql_query = NULL;
     sqlite3_stmt *stmt;
 
-// Dados a serem inseridos (usando variáveis)
+    // Dados a serem inseridos (usando variáveis)
     char date[DATE_LEN];
     unsigned int odometer = 0;
     double price = 0.0;

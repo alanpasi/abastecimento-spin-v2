@@ -1,5 +1,5 @@
-#include "stdpasi.h"
 #include <gtk/gtk.h>
+#include "stdpasi.h"
 
 int init_gtk(int, char *[], Invoice *);
 static void activate(GApplication *, gpointer);

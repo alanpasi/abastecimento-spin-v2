@@ -1,15 +1,45 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "init_gtk.h"
+#include "glibconfig.h"
 #include "stdpasi.h"
 
-static void click_cb(GtkButton *button, gpointer user_data) {
-    g_print("Clicked -> %s\n", (char *)user_data);
+static void on_entry_str_changed(GtkEntry *entry, gpointer user_data) {
+    GtkEntryBuffer *buffer = NULL;
+    buffer = gtk_entry_get_buffer(GTK_ENTRY(entry));
+    strcpy(user_data, gtk_entry_buffer_get_text(buffer));
+    g_print("Entry changed to %s\n", (char *)user_data);
+}
+
+static void on_entry_int_changed(GtkEntry *entry, gpointer *user_data) {
+    GtkEntryBuffer *buffer = NULL;
+    buffer = gtk_entry_get_buffer(GTK_ENTRY(entry));
+    *user_data = GINT_TO_POINTER(atoi(gtk_entry_buffer_get_text(buffer)));
+    g_print("Entry changed to %d\n", GPOINTER_TO_INT(*user_data));
+}
+
+static void on_entry_double_changed(GtkEntry *entry, gpointer user_data) {
+    char *endptr; // Usado por strtod para verificar erros
+    double *value_ptr = (double *)user_data;
+    GtkEntryBuffer *buffer = NULL;
+    buffer = gtk_entry_get_buffer(GTK_ENTRY(entry));
+    *value_ptr = strtod(gtk_entry_buffer_get_text(buffer), &endptr);
+    g_print("Entry changed to %.2f\n", *value_ptr);
+}
+
+static void save_invoice(GtkButton *button, gpointer user_data) {
+    Invoice *invoice = (Invoice *)user_data;
+    g_print("%s\n", (char *)invoice->date[invoice->record_count]);
+    g_print("%d\n", invoice->odometer[invoice->record_count]);
+    g_print("%.2f\n", invoice->unit_price[invoice->record_count]);
+    g_print("%.1f\n", invoice->liters[invoice->record_count]);
+    g_print("%.2f\n", invoice->total_amount[invoice->record_count]);
 }
 
 static void click_entry(GtkEntry *entry, gpointer user_data) {
-    GtkEntryBuffer *buffer;
+    GtkEntryBuffer *buffer = NULL;
     const gchar *text;
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry));
     text = gtk_entry_buffer_get_text (buffer);
@@ -18,20 +48,17 @@ static void click_entry(GtkEntry *entry, gpointer user_data) {
 
 static void activate(GApplication *app, gpointer user_data) {
     GtkWidget *window;
-    GtkWidget *label;
-    GtkWidget *separator;
     GtkWidget *button;
     GtkWidget *entry_date;
     GtkWidget *entry_odometer;
     GtkWidget *entry_price;
     GtkWidget *entry_liters;
     GtkWidget *entry_amount;
-    // GtkWidget *button2;
-    // GtkWidget *button3;
+    GtkWidget *label_record_count;
 
-    GtkEntryBuffer *buffer;
+    GtkEntryBuffer *buffer = NULL;
 
-    char str_value[32];
+    char str_value[32] = {0};
 
     Invoice *invoice = (Invoice *)user_data;
 
@@ -48,43 +75,44 @@ static void activate(GApplication *app, gpointer user_data) {
     gtk_window_set_default_size(GTK_WINDOW(window), 400, 500);
     gtk_window_set_title(GTK_WINDOW(window), "Abastecimento Spin v2");
 
-    // Cria um GtkLabel
-    label = GTK_WIDGET(gtk_builder_get_object(builder, "label_date"));
-    // gtk_label_set_text(GTK_LABEL(label), "Label 1...");
-
-    // Cria uma GtkEntry
+    // Cria as GtkEntry
     entry_date = GTK_WIDGET(gtk_builder_get_object(builder, "entry_date"));
-    g_signal_connect(entry_date, "activate", G_CALLBACK(click_entry), "Enter!!!");
+    g_signal_connect(entry_date, "changed", G_CALLBACK(on_entry_str_changed), &invoice->date[invoice->record_count]);
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_date));
     gtk_entry_buffer_set_text(buffer, (char *)invoice->date[invoice->record_count - 1], -1);
 
     entry_odometer = GTK_WIDGET(gtk_builder_get_object(builder, "entry_odometer"));
+    g_signal_connect(entry_odometer, "changed", G_CALLBACK(on_entry_int_changed), &invoice->odometer[invoice->record_count]);
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_odometer));
     snprintf(str_value, sizeof(str_value), "%d", invoice->odometer[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     entry_price = GTK_WIDGET(gtk_builder_get_object(builder, "entry_price"));
+    g_signal_connect(entry_price, "changed", G_CALLBACK(on_entry_double_changed), &invoice->unit_price[invoice->record_count]);
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_price));
     snprintf(str_value, sizeof(str_value), "%.2f", invoice->unit_price[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     entry_liters = GTK_WIDGET(gtk_builder_get_object(builder, "entry_liters"));
+    g_signal_connect(entry_liters, "changed", G_CALLBACK(on_entry_double_changed), &invoice->liters[invoice->record_count]);
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_liters));
     snprintf(str_value, sizeof(str_value), "%.1f", invoice->liters[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     entry_amount = GTK_WIDGET(gtk_builder_get_object(builder, "entry_amount"));
+    g_signal_connect(entry_amount, "changed", G_CALLBACK(on_entry_double_changed), &invoice->total_amount[invoice->record_count]);
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_amount));
     snprintf(str_value, sizeof(str_value), "%.2f", invoice->total_amount[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
-    // Cria um GtkSeparator
-    separator = GTK_WIDGET(gtk_builder_get_object(builder, "separator"));
-    gtk_widget_add_css_class(GTK_WIDGET(separator), "separator");
-
     // Cria GtkButton
     button = GTK_WIDGET(gtk_builder_get_object(builder, "button_save"));
-    g_signal_connect(button, "clicked", G_CALLBACK(click_cb), "Button Save Invoice!!!");
+    g_signal_connect(button, "clicked", G_CALLBACK(save_invoice), invoice);
+
+    // Cria GtkLabel
+    label_record_count = GTK_WIDGET(gtk_builder_get_object(builder, "label_record_count"));
+    snprintf(str_value, sizeof(str_value), "[%d] records", invoice->record_count);
+    gtk_label_set_text(GTK_LABEL(label_record_count), str_value);
 
     gtk_window_present(GTK_WINDOW (window));
 }
