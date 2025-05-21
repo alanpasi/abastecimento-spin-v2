@@ -14,15 +14,15 @@ static void on_entry_str_changed(GtkEntry *entry, gpointer user_data) {
 
 static void on_entry_int_changed(GtkEntry *entry, gpointer user_data) {
     GtkEntryBuffer *buffer = NULL;
-    int *value_ptr = (int *)user_data;
+    gint *value_ptr = (gint *)user_data;
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry));
     *value_ptr = atoi(gtk_entry_buffer_get_text(buffer));
     g_print("Entry changed to %d\n", *value_ptr);
 }
 
 static void on_entry_double_changed(GtkEntry *entry, gpointer user_data) {
-    char *endptr; // Usado por strtod para verificar erros
-    double *value_ptr = (double *)user_data;
+    gchar *endptr; // Usado por strtod para verificar erros
+    gdouble *value_ptr = (gdouble *)user_data;
     GtkEntryBuffer *buffer = NULL;
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry));
     *value_ptr = strtod(gtk_entry_buffer_get_text(buffer), &endptr);
@@ -37,14 +37,6 @@ static void save_invoice(GtkButton *button, gpointer user_data) {
     g_print("%.2f\n", invoice->unit_price[invoice->record_count]);
     g_print("%.1f\n", invoice->liters[invoice->record_count]);
     g_print("%.2f\n", invoice->total_amount[invoice->record_count]);
-}
-
-static void click_entry(GtkEntry *entry, gpointer user_data) {
-    GtkEntryBuffer *buffer = NULL;
-    const gchar *text;
-    buffer = gtk_entry_get_buffer(GTK_ENTRY(entry));
-    text = gtk_entry_buffer_get_text (buffer);
-    g_print("Clicked -> %s\n", text);
 }
 
 static void activate(GApplication *app, gpointer user_data) {
