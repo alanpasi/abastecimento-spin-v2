@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "spin_window.h"
-#include "glibconfig.h"
 #include "stdpasi.h"
 
 static void on_entry_str_changed(GtkEntry *entry, gpointer user_data) {
@@ -13,11 +12,12 @@ static void on_entry_str_changed(GtkEntry *entry, gpointer user_data) {
     g_print("Entry changed to %s\n", (char *)user_data);
 }
 
-static void on_entry_int_changed(GtkEntry *entry, gpointer *user_data) {
+static void on_entry_int_changed(GtkEntry *entry, gpointer user_data) {
     GtkEntryBuffer *buffer = NULL;
+    int *value_ptr = (int *)user_data;
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry));
-    *user_data = GINT_TO_POINTER(atoi(gtk_entry_buffer_get_text(buffer)));
-    g_print("Entry changed to %d\n", GPOINTER_TO_INT(*user_data));
+    *value_ptr = atoi(gtk_entry_buffer_get_text(buffer));
+    g_print("Entry changed to %d\n", *value_ptr);
 }
 
 static void on_entry_double_changed(GtkEntry *entry, gpointer user_data) {
