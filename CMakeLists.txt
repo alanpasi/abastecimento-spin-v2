@@ -21,7 +21,7 @@ include_directories(include ${GTK4_INCLUDE_DIRS} ${SQLITE3_INCLUDE_DIRS}) # Adic
 # Cria a biblioteca estática "stdpasi"
 add_library(stdpasi STATIC
     lib/stdpasi.c
-    lib/init_gtk.c # Adiciona init_gtk.c à biblioteca
+    lib/spin_window.c # Adiciona init_gtk.c à biblioteca
 )
 
 # Cria o executável "abastecimento_spin"

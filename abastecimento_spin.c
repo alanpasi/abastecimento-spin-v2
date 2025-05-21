@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 
-#include "init_gtk.h"
+#include "spin_window.h"
 #include "stdpasi.h"
 
 int main(int argc, char *argv[]) {

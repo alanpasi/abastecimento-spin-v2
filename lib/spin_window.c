@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "init_gtk.h"
+#include "spin_window.h"
 #include "glibconfig.h"
 #include "stdpasi.h"
 
@@ -31,6 +31,7 @@ static void on_entry_double_changed(GtkEntry *entry, gpointer user_data) {
 
 static void save_invoice(GtkButton *button, gpointer user_data) {
     Invoice *invoice = (Invoice *)user_data;
+    g_print("%d\n", invoice->record_count);
     g_print("%s\n", (char *)invoice->date[invoice->record_count]);
     g_print("%d\n", invoice->odometer[invoice->record_count]);
     g_print("%.2f\n", invoice->unit_price[invoice->record_count]);
