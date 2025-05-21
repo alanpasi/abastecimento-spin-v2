@@ -330,3 +330,69 @@ int add_invoice(Invoice *invoice) {
 
     return 0;
 }
+
+/* Function
+    Save invoice */
+int saveInvoice(Invoice *invoice) {
+    sqlite3 *db;
+    int rc = 0;
+    char db_name[] = "./db/spin.sqlite";
+    char *sql_query = NULL;
+    sqlite3_stmt *stmt;
+
+    rc = sqlite3_open(db_name, &db);
+
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Mensagem: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return 1;
+    } else {
+        fprintf(stdout, "db <%s> aberto com sucesso!\n", db_name);
+    }
+
+    // Create a SQL query
+    sql_query = "INSERT INTO notas (date, odometer, price, liters, amount) VALUES (?, ?, ?, ?, ?);";
+
+    // Preparar a declaração SQL
+    rc = sqlite3_prepare_v2(db, sql_query, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Erro ao preparar a declaração: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return 1;
+    }
+
+    // Vincular os valores às variáveis
+    sqlite3_bind_text(stmt, 1, invoice->date[invoice->record_count],
+                        strlen(invoice->date[invoice->record_count]),
+                        SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 2, invoice->odometer[invoice->record_count]);
+    sqlite3_bind_double(stmt, 3, invoice->unit_price[invoice->record_count]);
+    sqlite3_bind_double(stmt, 4, invoice->liters[invoice->record_count]);
+    sqlite3_bind_double(stmt, 5, invoice->total_amount[invoice->record_count]);
+
+    // Executar a declaração
+    rc = sqlite3_step(stmt);
+    if (rc != SQLITE_DONE) {
+        fprintf(stderr, "Erro ao executar a inserção: %s\n", sqlite3_errmsg(db));
+    } else {
+        fprintf(stdout, "Dados inseridos com sucesso\n");
+
+        // Atualiza struct invoice
+        // strcpy(invoice->date[invoice->record_count], date);
+        // invoice->odometer[invoice->record_count] = odometer;
+        // invoice->unit_price[invoice->record_count] = price;
+        // invoice->liters[invoice->record_count] = liters;
+        // invoice->total_amount[invoice->record_count] = amount;
+        // invoice->record_count ++;
+
+        fprintf(stdout, "Número de registros: %d\n",  invoice->record_count);
+    }
+
+    // Finalizar a declaração
+    sqlite3_finalize(stmt);
+
+    // Libera memória alocada
+    sqlite3_close(db);
+
+    return 0;
+}

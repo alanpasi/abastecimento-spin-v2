@@ -1,6 +1,5 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
-#include <string.h>
 
 #include "spin_window.h"
 #include "stdpasi.h"
@@ -37,6 +36,8 @@ static void save_invoice(GtkButton *button, gpointer user_data) {
     g_print("%.2f\n", invoice->unit_price[invoice->record_count]);
     g_print("%.1f\n", invoice->liters[invoice->record_count]);
     g_print("%.2f\n", invoice->total_amount[invoice->record_count]);
+
+    saveInvoice(invoice);
 }
 
 static void activate(GApplication *app, gpointer user_data) {

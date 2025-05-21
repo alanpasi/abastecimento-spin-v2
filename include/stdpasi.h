@@ -86,4 +86,8 @@ int mainPage(Invoice *);
     Adiciona invoice */
 int add_invoice(Invoice *);
 
+/* Function
+    Save invoice */
+int saveInvoice(Invoice *);
+
 #endif
