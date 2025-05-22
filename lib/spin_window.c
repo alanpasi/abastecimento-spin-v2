@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "spin_window.h"
+#include "gtk/gtkshortcut.h"
 #include "stdpasi.h"
 
 static void on_entry_str_changed(GtkEntry *entry, gpointer user_data) {
@@ -49,12 +50,24 @@ static void activate(GApplication *app, gpointer user_data) {
     GtkWidget *entry_liters;
     GtkWidget *entry_amount;
     GtkWidget *label_record_count;
+    GtkWidget *initial_date;
+    GtkWidget *final_date;
+    GtkWidget *total_days;
+    GtkWidget *total_odometer;
+    GtkWidget *total_amount;
+    GtkWidget *total_liter;
+    GtkWidget *amount_per_day;
+    GtkWidget *amount_per_km;
+    GtkWidget *km_per_day;
+    GtkWidget *km_per_liter;
 
     GtkEntryBuffer *buffer = NULL;
 
     char str_value[32] = {0};
 
     Invoice *invoice = (Invoice *)user_data;
+
+    InvoiceReport invoiceReport = {0};
 
     GtkBuilder *builder;
     // GtkCssProvider *provider;
@@ -66,8 +79,8 @@ static void activate(GApplication *app, gpointer user_data) {
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
     gtk_window_set_application(GTK_WINDOW(window), GTK_APPLICATION(app));
-    gtk_window_set_default_size(GTK_WINDOW(window), 400, 500);
-    gtk_window_set_title(GTK_WINDOW(window), "Abastecimento Spin v2");
+    gtk_window_set_default_size(GTK_WINDOW(window), 500, 600);
+    gtk_window_set_title(GTK_WINDOW(window), "Spin Refuel");
 
     // Cria as GtkEntry
     entry_date = GTK_WIDGET(gtk_builder_get_object(builder, "entry_date"));
@@ -107,6 +120,47 @@ static void activate(GApplication *app, gpointer user_data) {
     label_record_count = GTK_WIDGET(gtk_builder_get_object(builder, "label_record_count"));
     snprintf(str_value, sizeof(str_value), "[%d] records", invoice->record_count);
     gtk_label_set_text(GTK_LABEL(label_record_count), str_value);
+
+    // Report update
+    invoiceReport = report(invoice);
+    // Report Page
+    initial_date = GTK_WIDGET(gtk_builder_get_object(builder, "initial_date"));
+    gtk_label_set_text(GTK_LABEL(initial_date), invoiceReport.initial_date);
+
+    final_date = GTK_WIDGET(gtk_builder_get_object(builder, "final_date"));
+    gtk_label_set_text(GTK_LABEL(final_date), invoiceReport.final_date);
+
+    total_days = GTK_WIDGET(gtk_builder_get_object(builder, "total_days"));
+    snprintf(str_value, sizeof(str_value), "%d", invoiceReport.total_days);
+    gtk_label_set_text(GTK_LABEL(total_days), str_value);
+
+    total_odometer = GTK_WIDGET(gtk_builder_get_object(builder, "total_odometer"));
+    snprintf(str_value, sizeof(str_value), "%d", invoiceReport.total_odometer);
+    gtk_label_set_text(GTK_LABEL(total_odometer), str_value);
+
+    total_amount = GTK_WIDGET(gtk_builder_get_object(builder, "total_amount"));
+    snprintf(str_value, sizeof(str_value), "%.2f", invoiceReport.total_amount);
+    gtk_label_set_text(GTK_LABEL(total_amount), str_value);
+
+    total_liter = GTK_WIDGET(gtk_builder_get_object(builder, "total_liter"));
+    snprintf(str_value, sizeof(str_value), "%.1f", invoiceReport.total_liter);
+    gtk_label_set_text(GTK_LABEL(total_liter), str_value);
+
+    amount_per_day = GTK_WIDGET(gtk_builder_get_object(builder, "amount_per_day"));
+    snprintf(str_value, sizeof(str_value), "%.2f", invoiceReport.amount_per_day);
+    gtk_label_set_text(GTK_LABEL(amount_per_day), str_value);
+
+    amount_per_km = GTK_WIDGET(gtk_builder_get_object(builder, "amount_per_km"));
+    snprintf(str_value, sizeof(str_value), "%.2f", invoiceReport.amount_per_km);
+    gtk_label_set_text(GTK_LABEL(amount_per_km), str_value);
+
+    km_per_day = GTK_WIDGET(gtk_builder_get_object(builder, "km_per_day"));
+    snprintf(str_value, sizeof(str_value), "%.2f", invoiceReport.km_per_day);
+    gtk_label_set_text(GTK_LABEL(km_per_day), str_value);
+
+    km_per_liter = GTK_WIDGET(gtk_builder_get_object(builder, "km_per_liter"));
+    snprintf(str_value, sizeof(str_value), "%.2f", invoiceReport.km_per_liter);
+    gtk_label_set_text(GTK_LABEL(km_per_liter), str_value);
 
     gtk_window_present(GTK_WINDOW (window));
 }

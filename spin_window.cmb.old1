@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
-<!-- Created with Cambalache 0.96.1 -->
-<cambalache-project version="0.96.0" target_tk="gtk-4.0">
-  <ui filename="spin_window.ui" sha256="4455c0dd918d436f126a086e66b4dc136323257ee7776453ab28b8d34929eb09"/>
-</cambalache-project>

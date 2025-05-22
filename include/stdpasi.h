@@ -27,7 +27,7 @@ typedef struct {
     unsigned record_count;
 } Invoice;
 
-/* struct Resume */
+/* struct InvoiceReport */
 typedef struct {
     char initial_date[DATE_LEN];
     char final_date[DATE_LEN];
@@ -39,13 +39,13 @@ typedef struct {
     double amount_per_km;
     double km_per_day;
     double km_per_liter;
-} Resume;
+} InvoiceReport;
 
 /* Menu options */
 typedef enum {
     INSERT = 1,
     LIST,
-    RESUME,
+    REPORT,
     QUIT
 } MenuOption;
 
@@ -64,7 +64,7 @@ double totalAmount(Invoice *);
 
 /* Function
     Apresenta o resumo das Invoices */
-void resume(Invoice *);
+InvoiceReport report(Invoice *);
 
 /* Function
     Soma total de litros */

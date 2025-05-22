@@ -117,34 +117,36 @@ double totalAmount(Invoice *invoice) {
 
 /* Function
     Apresenta o resumo das Invoices */
-void resume(Invoice *invoice) {
+InvoiceReport report(Invoice *invoice) {
 
-    Resume resume = {0};
+    InvoiceReport report = {0};
     // Coleta informações
-    strcpy(resume.initial_date, invoice->date[0]);
-    strcpy(resume.final_date, invoice->date[invoice->record_count - 1]);
+    strcpy(report.initial_date, invoice->date[0]);
+    strcpy(report.final_date, invoice->date[invoice->record_count - 1]);
 
-    char *date1 = resume.initial_date;
-    char *date2 = resume.final_date;
-    resume.total_days = daysbtd(date1, date2);
-    resume.total_odometer = totalOdometer(invoice);
-    resume.total_amount = totalAmount(invoice);
-    resume.total_liter = totalLiters(invoice);
-    resume.km_per_day = (double)resume.total_odometer / resume.total_days;
-    resume.amount_per_day = resume.total_amount / resume.total_days;
-    resume.amount_per_km = resume.total_amount / resume.total_odometer;
-    resume.km_per_liter = resume.total_odometer / resume.total_liter;
+    char *date1 = report.initial_date;
+    char *date2 = report.final_date;
+    report.total_days = daysbtd(date1, date2);
+    report.total_odometer = totalOdometer(invoice);
+    report.total_amount = totalAmount(invoice);
+    report.total_liter = totalLiters(invoice);
+    report.km_per_day = (double)report.total_odometer / report.total_days;
+    report.amount_per_day = report.total_amount / report.total_days;
+    report.amount_per_km = report.total_amount / report.total_odometer;
+    report.km_per_liter = report.total_odometer / report.total_liter;
 
     puts("*** Resumo ***");
     printf("Número de registros = %d\n", invoice->record_count);
-    printf("Date: %s to %s\n", resume.initial_date, resume.final_date);
-    printf("Total days = %'d\n", resume.total_days);
-    printf("Total odometer = %'d km\n", resume.total_odometer);
-    printf("km per day = %'.1f\n", resume.km_per_day);
-    printf("Total amount = R$ %'.2f\n", resume.total_amount);
-    printf("Amount per day = R$ %'.2f\n", resume.amount_per_day);
-    printf("Amount per km = R$ %'.2f\n", resume.amount_per_km);
-    printf("km per liter = %'.2f\n", resume.km_per_liter);
+    printf("Date: %s to %s\n", report.initial_date, report.final_date);
+    printf("Total days = %'d\n", report.total_days);
+    printf("Total odometer = %'d km\n", report.total_odometer);
+    printf("km per day = %'.1f\n", report.km_per_day);
+    printf("Total amount = R$ %'.2f\n", report.total_amount);
+    printf("Amount per day = R$ %'.2f\n", report.amount_per_day);
+    printf("Amount per km = R$ %'.2f\n", report.amount_per_km);
+    printf("km per liter = %'.2f\n", report.km_per_liter);
+
+    return report;
 }
 
 /* Function
@@ -233,8 +235,8 @@ int mainPage(Invoice *invoice) {
             case LIST:
                 listInvoiceData(invoice);
                 break;
-            case RESUME:
-                resume(invoice);
+            case REPORT:
+                report(invoice);
                 break;
             case QUIT:
                 // TO_DO

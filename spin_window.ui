@@ -5,150 +5,486 @@
   <requires lib="gtk" version="4.18"/>
   <object class="GtkApplicationWindow" id="window">
     <child>
-      <object class="GtkGrid" id="grid1">
-        <property name="column-homogeneous">True</property>
-        <property name="row-homogeneous">True</property>
+      <object class="GtkBox" id="main_box">
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="label_date">
+          <object class="GtkStack" id="main_stack">
+            <child>
+              <object class="GtkStackPage" id="stackpage1">
+                <property name="child">
+                  <object class="GtkBox" id="box1">
+                    <property name="homogeneous">True</property>
+                    <child>
+                      <object class="GtkGrid" id="grid1">
+                        <property name="column-homogeneous">True</property>
+                        <property name="row-homogeneous">True</property>
+                        <child>
+                          <object class="GtkLabel" id="label_date">
+                            <property name="halign">center</property>
+                            <property name="label">Date</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkEntry" id="entry_date">
+                            <property name="halign">center</property>
+                            <property name="xalign">0.5</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label_odometer">
+                            <property name="halign">center</property>
+                            <property name="label">Odometer</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">2</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkEntry" id="entry_odometer">
+                            <property name="halign">center</property>
+                            <property name="xalign">0.5</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">3</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label_price">
+                            <property name="halign">center</property>
+                            <property name="label">Price</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">4</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkEntry" id="entry_price">
+                            <property name="halign">center</property>
+                            <property name="xalign">0.5</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">5</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label_liters">
+                            <property name="halign">center</property>
+                            <property name="label">Liters</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">6</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkEntry" id="entry_liters">
+                            <property name="halign">center</property>
+                            <property name="xalign">0.5</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">7</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label_amount">
+                            <property name="halign">center</property>
+                            <property name="label">Amount</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">8</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkEntry" id="entry_amount">
+                            <property name="halign">center</property>
+                            <property name="xalign">0.5</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">9</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator" id="separator1">
+                            <property name="margin-bottom">16</property>
+                            <property name="margin-end">50</property>
+                            <property name="margin-start">50</property>
+                            <property name="margin-top">16</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">10</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_save">
+                            <property name="halign">center</property>
+                            <property name="label">Save Invoice</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">11</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator" id="separator2">
+                            <property name="margin-bottom">16</property>
+                            <property name="margin-end">50</property>
+                            <property name="margin-start">50</property>
+                            <property name="margin-top">16</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">12</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label_record_count">
+                            <property name="justify">fill</property>
+                            <property name="label">records</property>
+                            <property name="margin-bottom">6</property>
+                            <property name="margin-end">12</property>
+                            <property name="margin-start">12</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="column-span">3</property>
+                              <property name="row">13</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+                <property name="name">form_page</property>
+                <property name="title">New Invoice</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStackPage" id="stackpage2">
+                <property name="child">
+                  <object class="GtkBox" id="box2">
+                    <property name="halign">center</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">10</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkGrid" id="grid2">
+                        <property name="column-spacing">24</property>
+                        <property name="row-homogeneous">True</property>
+                        <property name="row-spacing">6</property>
+                        <child>
+                          <object class="GtkLabel" id="initial_date_2">
+                            <property name="justify">center</property>
+                            <property name="label">Initial date:</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="initial_date">
+                            <property name="label">initial_date</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">1</property>
+                              <property name="column-span">2</property>
+                              <property name="row">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="final_date_2">
+                            <property name="label">Final date:</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="row">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="final_date">
+                            <property name="label">final_date</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">1</property>
+                              <property name="column-span">2</property>
+                              <property name="row">1</property>
+                              <property name="row-span">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="total_days_2">
+                            <property name="label">Total days:</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="row">2</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="total_days">
+                            <property name="label">total_days</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">1</property>
+                              <property name="column-span">2</property>
+                              <property name="row">2</property>
+                              <property name="row-span">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="total_odometer_2">
+                            <property name="label">Odometer:</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="row">3</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="total_odometer">
+                            <property name="label">odometer</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">1</property>
+                              <property name="column-span">2</property>
+                              <property name="row">3</property>
+                              <property name="row-span">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="total_amount_2">
+                            <property name="label">Total amount:</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="row">4</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="total_amount">
+                            <property name="label">total_amount</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">1</property>
+                              <property name="column-span">2</property>
+                              <property name="row">4</property>
+                              <property name="row-span">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="total_liter_2">
+                            <property name="label">Total liter:</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="row">5</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="total_liter">
+                            <property name="label">total_liter</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">1</property>
+                              <property name="column-span">2</property>
+                              <property name="row">5</property>
+                              <property name="row-span">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="amount_per_day_2">
+                            <property name="label">Amount per day:</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="row">6</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="amount_per_day">
+                            <property name="label">amount_per_day</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">1</property>
+                              <property name="column-span">2</property>
+                              <property name="row">6</property>
+                              <property name="row-span">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="amount_per_km_2">
+                            <property name="label">Amount per km:</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="row">7</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="amount_per_km">
+                            <property name="label">amount_per_km</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">1</property>
+                              <property name="column-span">2</property>
+                              <property name="row">7</property>
+                              <property name="row-span">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="km_per_day_2">
+                            <property name="label">km per day:</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="row">8</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="km_per_day">
+                            <property name="label">km_per_day</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">1</property>
+                              <property name="column-span">2</property>
+                              <property name="row">8</property>
+                              <property name="row-span">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="km_per_liter_2">
+                            <property name="label">km per liter:</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">0</property>
+                              <property name="row">9</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="km_per_liter">
+                            <property name="label">km_per_liter</property>
+                            <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">1.0</property>
+                            <layout>
+                              <property name="column">1</property>
+                              <property name="column-span">2</property>
+                              <property name="row">9</property>
+                              <property name="row-span">0</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+                <property name="name">info_page</property>
+                <property name="title">Report</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStackSwitcher" id="main_stack_switcher">
             <property name="halign">center</property>
-            <property name="label">Date</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">0</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkEntry" id="entry_date">
-            <property name="halign">center</property>
-            <property name="xalign">0.5</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">1</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label_odometer">
-            <property name="halign">center</property>
-            <property name="label">Odometer</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">2</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkEntry" id="entry_odometer">
-            <property name="halign">center</property>
-            <property name="xalign">0.5</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">3</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label_price">
-            <property name="halign">center</property>
-            <property name="label">Price</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">4</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkEntry" id="entry_price">
-            <property name="halign">center</property>
-            <property name="xalign">0.5</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">5</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label_liters">
-            <property name="halign">center</property>
-            <property name="label">Liters</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">6</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkEntry" id="entry_liters">
-            <property name="halign">center</property>
-            <property name="xalign">0.5</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">7</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label_amount">
-            <property name="halign">center</property>
-            <property name="label">Amount</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">8</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkEntry" id="entry_amount">
-            <property name="halign">center</property>
-            <property name="xalign">0.5</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">9</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSeparator" id="separator">
-            <property name="margin-end">50</property>
-            <property name="margin-start">50</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">10</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="button_save">
-            <property name="halign">center</property>
-            <property name="label">Save Invoice</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="column-span">3</property>
-              <property name="row">11</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label_record_count">
-            <property name="justify">fill</property>
-            <property name="label">records</property>
-            <property name="xalign">1.0</property>
-            <layout>
-              <property name="column">2</property>
-              <property name="row">12</property>
-            </layout>
+            <property name="stack">main_stack</property>
           </object>
         </child>
       </object>
