@@ -56,11 +56,11 @@ int daysbtd(char *, char *);
 
 /* Function (Similar a um METHOD)
     Função que calcula a quantidade de quilômetros */
-int total_odometer(Invoice *);
+int totalOdometer(Invoice *);
 
 /* Function
     Função que soma o Valor Total */
-double total_amount(Invoice *);
+double totalAmount(Invoice *);
 
 /* Function
     Apresenta o resumo das Invoices */
@@ -68,7 +68,7 @@ void resume(Invoice *);
 
 /* Function
     Soma total de litros */
-double total_liters(Invoice *);
+double totalLiters(Invoice *);
 
 /* Function
     Inicializa db e retorna número de registros*/
@@ -84,7 +84,7 @@ int mainPage(Invoice *);
 
 /* Function
     Adiciona invoice */
-int add_invoice(Invoice *);
+int addInvoice(Invoice *);
 
 /* Function
     Save invoice */

@@ -101,13 +101,13 @@ int daysbtd(char *pdate1, char *pdate2) {
 
 /* Function (Similar a um METHOD)
     Função que calcula a quantidade de quilômetros */
-int total_odometer(Invoice *invoice) {
+int totalOdometer(Invoice *invoice) {
     return invoice->odometer[invoice->record_count - 1] - invoice->odometer[0];
 }
 
 /* Function
     Função que soma o Valor Total */
-double total_amount(Invoice *invoice) {
+double totalAmount(Invoice *invoice) {
     double result = 0;
     for (int r = 0; r < invoice->record_count; r++) {
         result = result + invoice->total_amount[r];
@@ -127,9 +127,9 @@ void resume(Invoice *invoice) {
     char *date1 = resume.initial_date;
     char *date2 = resume.final_date;
     resume.total_days = daysbtd(date1, date2);
-    resume.total_odometer = total_odometer(invoice);
-    resume.total_amount = total_amount(invoice);
-    resume.total_liter = total_liters(invoice);
+    resume.total_odometer = totalOdometer(invoice);
+    resume.total_amount = totalAmount(invoice);
+    resume.total_liter = totalLiters(invoice);
     resume.km_per_day = (double)resume.total_odometer / resume.total_days;
     resume.amount_per_day = resume.total_amount / resume.total_days;
     resume.amount_per_km = resume.total_amount / resume.total_odometer;
@@ -149,7 +149,7 @@ void resume(Invoice *invoice) {
 
 /* Function
     Soma total de litros */
-double total_liters(Invoice *invoice) {
+double totalLiters(Invoice *invoice) {
     double result = 0;
     for (int i = 0; i < invoice->record_count; i++) {
         result = result + invoice->liters[i];
@@ -228,7 +228,7 @@ int mainPage(Invoice *invoice) {
 
         switch ((unsigned)option) {
             case INSERT:
-                add_invoice(invoice);
+                addInvoice(invoice);
                 break;
             case LIST:
                 listInvoiceData(invoice);
@@ -250,7 +250,7 @@ int mainPage(Invoice *invoice) {
 
 /* Function
     Adiciona invoice */
-int add_invoice(Invoice *invoice) {
+int addInvoice(Invoice *invoice) {
     sqlite3 *db;
     int rc = 0;
     char db_name[] = "./db/spin.sqlite";
@@ -376,16 +376,8 @@ int saveInvoice(Invoice *invoice) {
         fprintf(stderr, "Erro ao executar a inserção: %s\n", sqlite3_errmsg(db));
     } else {
         fprintf(stdout, "Dados inseridos com sucesso\n");
-
-        // Atualiza struct invoice
-        // strcpy(invoice->date[invoice->record_count], date);
-        // invoice->odometer[invoice->record_count] = odometer;
-        // invoice->unit_price[invoice->record_count] = price;
-        // invoice->liters[invoice->record_count] = liters;
-        // invoice->total_amount[invoice->record_count] = amount;
-        // invoice->record_count ++;
-
-        fprintf(stdout, "Número de registros: %d\n",  invoice->record_count);
+        invoice->record_count ++;
+        fprintf(stdout, "Número de registros: %d\n", invoice->record_count);
     }
 
     // Finalizar a declaração

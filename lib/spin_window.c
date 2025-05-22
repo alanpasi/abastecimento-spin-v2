@@ -28,7 +28,7 @@ static void on_entry_double_changed(GtkEntry *entry, gpointer user_data) {
     g_print("Entry changed to %.2f\n", *value_ptr);
 }
 
-static void save_invoice(GtkButton *button, gpointer user_data) {
+static void on_button_invoice_clicked(GtkButton *button, gpointer user_data) {
     Invoice *invoice = (Invoice *)user_data;
     g_print("%d\n", invoice->record_count);
     g_print("%s\n", (char *)invoice->date[invoice->record_count]);
@@ -101,7 +101,7 @@ static void activate(GApplication *app, gpointer user_data) {
 
     // Cria GtkButton
     button = GTK_WIDGET(gtk_builder_get_object(builder, "button_save"));
-    g_signal_connect(button, "clicked", G_CALLBACK(save_invoice), invoice);
+    g_signal_connect(button, "clicked", G_CALLBACK(on_button_invoice_clicked), invoice);
 
     // Cria GtkLabel
     label_record_count = GTK_WIDGET(gtk_builder_get_object(builder, "label_record_count"));
@@ -111,7 +111,7 @@ static void activate(GApplication *app, gpointer user_data) {
     gtk_window_present(GTK_WINDOW (window));
 }
 
-int init_gtk(int argc, char *argv[], Invoice *invoice) {
+int initWindow(int argc, char *argv[], Invoice *invoice) {
     GtkApplication *app = NULL;
     gint status = 0;
 
