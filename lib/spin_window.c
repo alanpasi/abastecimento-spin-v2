@@ -80,7 +80,7 @@ static void activate(GApplication *app, gpointer user_data) {
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
     gtk_window_set_application(GTK_WINDOW(window), GTK_APPLICATION(app));
-    gtk_window_set_default_size(GTK_WINDOW(window), 600, 600);
+    gtk_window_set_default_size(GTK_WINDOW(window), 500, 450);
     gtk_window_set_title(GTK_WINDOW(window), "Spin Refuel");
 
     // Cria as GtkEntry

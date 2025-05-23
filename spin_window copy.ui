@@ -9,18 +9,20 @@
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkStack" id="main_stack">
+            <property name="halign">center</property>
+            <property name="hhomogeneous">False</property>
+            <property name="vhomogeneous">False</property>
             <child>
               <object class="GtkStackPage" id="stackpage1">
                 <property name="child">
                   <object class="GtkBox" id="box1">
-                    <property name="homogeneous">True</property>
+                    <property name="halign">center</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkGrid" id="grid1">
-                        <property name="column-homogeneous">True</property>
                         <property name="halign">center</property>
+                        <property name="orientation">vertical</property>
                         <property name="row-homogeneous">True</property>
-                        <property name="row-spacing">6</property>
                         <child>
                           <object class="GtkLabel" id="label_date">
                             <property name="halign">center</property>
@@ -169,18 +171,18 @@
               <object class="GtkStackPage" id="stackpage2">
                 <property name="child">
                   <object class="GtkBox" id="box2">
-                    <property name="homogeneous">True</property>
+                    <property name="halign">center</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkGrid" id="grid2">
-                        <property name="column-spacing">32</property>
-                        <property name="halign">center</property>
-                        <property name="row-homogeneous">True</property>
+                        <property name="valign">center</property>
                         <child>
                           <object class="GtkLabel" id="initial_date_2">
                             <property name="label">Initial date:</property>
                             <property name="max-width-chars">30</property>
-                            <property name="xalign">1.0</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="row">0</property>
@@ -191,9 +193,11 @@
                           <object class="GtkLabel" id="initial_date">
                             <property name="label">initial_date</property>
                             <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">1</property>
+                              <property name="column-span">2</property>
                               <property name="row">0</property>
                             </layout>
                           </object>
@@ -202,7 +206,9 @@
                           <object class="GtkLabel" id="final_date_2">
                             <property name="label">Final date:</property>
                             <property name="max-width-chars">30</property>
-                            <property name="xalign">1.0</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="row">1</property>
@@ -213,9 +219,11 @@
                           <object class="GtkLabel" id="final_date">
                             <property name="label">final_date</property>
                             <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">1</property>
+                              <property name="column-span">2</property>
                               <property name="row">1</property>
                             </layout>
                           </object>
@@ -224,7 +232,9 @@
                           <object class="GtkLabel" id="total_days_2">
                             <property name="label">Total days:</property>
                             <property name="max-width-chars">30</property>
-                            <property name="xalign">1.0</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="row">2</property>
@@ -235,9 +245,11 @@
                           <object class="GtkLabel" id="total_days">
                             <property name="label">total_days</property>
                             <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">1</property>
+                              <property name="column-span">2</property>
                               <property name="row">2</property>
                             </layout>
                           </object>
@@ -246,7 +258,9 @@
                           <object class="GtkLabel" id="total_odometer_2">
                             <property name="label">Odometer (km):</property>
                             <property name="max-width-chars">30</property>
-                            <property name="xalign">1.0</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="row">3</property>
@@ -257,9 +271,11 @@
                           <object class="GtkLabel" id="total_odometer">
                             <property name="label">odometer</property>
                             <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">1</property>
+                              <property name="column-span">2</property>
                               <property name="row">3</property>
                             </layout>
                           </object>
@@ -268,7 +284,9 @@
                           <object class="GtkLabel" id="total_amount_2">
                             <property name="label">Total amount (R$):</property>
                             <property name="max-width-chars">30</property>
-                            <property name="xalign">1.0</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="row">4</property>
@@ -279,9 +297,11 @@
                           <object class="GtkLabel" id="total_amount">
                             <property name="label">total_amount</property>
                             <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">1</property>
+                              <property name="column-span">2</property>
                               <property name="row">4</property>
                             </layout>
                           </object>
@@ -290,7 +310,9 @@
                           <object class="GtkLabel" id="total_liter_2">
                             <property name="label">Total liter (L):</property>
                             <property name="max-width-chars">30</property>
-                            <property name="xalign">1.0</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="row">5</property>
@@ -301,9 +323,11 @@
                           <object class="GtkLabel" id="total_liter">
                             <property name="label">total_liter</property>
                             <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">1</property>
+                              <property name="column-span">2</property>
                               <property name="row">5</property>
                             </layout>
                           </object>
@@ -312,7 +336,9 @@
                           <object class="GtkLabel" id="amount_per_day_2">
                             <property name="label">Amount per day (R$/day):</property>
                             <property name="max-width-chars">30</property>
-                            <property name="xalign">1.0</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="row">6</property>
@@ -323,9 +349,11 @@
                           <object class="GtkLabel" id="amount_per_day">
                             <property name="label">amount_per_day</property>
                             <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">1</property>
+                              <property name="column-span">2</property>
                               <property name="row">6</property>
                             </layout>
                           </object>
@@ -334,7 +362,9 @@
                           <object class="GtkLabel" id="amount_per_km_2">
                             <property name="label">Amount per km (R$/km):</property>
                             <property name="max-width-chars">30</property>
-                            <property name="xalign">1.0</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="row">7</property>
@@ -345,9 +375,11 @@
                           <object class="GtkLabel" id="amount_per_km">
                             <property name="label">amount_per_km</property>
                             <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">1</property>
+                              <property name="column-span">2</property>
                               <property name="row">7</property>
                             </layout>
                           </object>
@@ -356,7 +388,9 @@
                           <object class="GtkLabel" id="km_per_day_2">
                             <property name="label">km per day (km/day):</property>
                             <property name="max-width-chars">30</property>
-                            <property name="xalign">1.0</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="row">8</property>
@@ -367,9 +401,11 @@
                           <object class="GtkLabel" id="km_per_day">
                             <property name="label">km_per_day</property>
                             <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">1</property>
+                              <property name="column-span">2</property>
                               <property name="row">8</property>
                             </layout>
                           </object>
@@ -378,7 +414,9 @@
                           <object class="GtkLabel" id="km_per_liter_2">
                             <property name="label">km per liter (km/L):</property>
                             <property name="max-width-chars">30</property>
-                            <property name="xalign">1.0</property>
+                            <property name="single-line-mode">True</property>
+                            <property name="wrap">True</property>
+                            <property name="xalign">0.0</property>
                             <layout>
                               <property name="column">0</property>
                               <property name="row">9</property>
@@ -389,23 +427,26 @@
                           <object class="GtkLabel" id="km_per_liter">
                             <property name="label">km_per_liter</property>
                             <property name="max-width-chars">30</property>
+                            <property name="wrap">True</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">1</property>
+                              <property name="column-span">2</property>
                               <property name="row">9</property>
                             </layout>
                           </object>
                         </child>
                         <child>
                           <object class="GtkLabel" id="label_record_count_2">
-                            <property name="halign">center</property>
-                            <property name="justify">center</property>
+                            <property name="justify">fill</property>
                             <property name="label">records</property>
-                            <property name="max-width-chars">30</property>
+                            <property name="margin-bottom">6</property>
+                            <property name="margin-end">12</property>
+                            <property name="margin-start">12</property>
                             <property name="xalign">1.0</property>
                             <layout>
                               <property name="column">0</property>
-                              <property name="column-span">2</property>
+                              <property name="column-span">3</property>
                               <property name="row">10</property>
                             </layout>
                           </object>
