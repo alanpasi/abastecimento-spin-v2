@@ -50,6 +50,7 @@ static void activate(GApplication *app, gpointer user_data) {
     GtkWidget *entry_liters;
     GtkWidget *entry_amount;
     GtkWidget *label_record_count;
+    GtkWidget *label_record_count_2;
     GtkWidget *initial_date;
     GtkWidget *final_date;
     GtkWidget *total_days;
@@ -79,7 +80,7 @@ static void activate(GApplication *app, gpointer user_data) {
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
     gtk_window_set_application(GTK_WINDOW(window), GTK_APPLICATION(app));
-    gtk_window_set_default_size(GTK_WINDOW(window), 500, 600);
+    gtk_window_set_default_size(GTK_WINDOW(window), 600, 600);
     gtk_window_set_title(GTK_WINDOW(window), "Spin Refuel");
 
     // Cria as GtkEntry
@@ -91,25 +92,25 @@ static void activate(GApplication *app, gpointer user_data) {
     entry_odometer = GTK_WIDGET(gtk_builder_get_object(builder, "entry_odometer"));
     g_signal_connect(entry_odometer, "changed", G_CALLBACK(on_entry_int_changed), &invoice->odometer[invoice->record_count]);
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_odometer));
-    snprintf(str_value, sizeof(str_value), "%d", invoice->odometer[invoice->record_count - 1]);
+    snprintf(str_value, sizeof(str_value), "%'d", invoice->odometer[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     entry_price = GTK_WIDGET(gtk_builder_get_object(builder, "entry_price"));
     g_signal_connect(entry_price, "changed", G_CALLBACK(on_entry_double_changed), &invoice->unit_price[invoice->record_count]);
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_price));
-    snprintf(str_value, sizeof(str_value), "%.2f", invoice->unit_price[invoice->record_count - 1]);
+    snprintf(str_value, sizeof(str_value), "%'.2f", invoice->unit_price[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     entry_liters = GTK_WIDGET(gtk_builder_get_object(builder, "entry_liters"));
     g_signal_connect(entry_liters, "changed", G_CALLBACK(on_entry_double_changed), &invoice->liters[invoice->record_count]);
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_liters));
-    snprintf(str_value, sizeof(str_value), "%.1f", invoice->liters[invoice->record_count - 1]);
+    snprintf(str_value, sizeof(str_value), "%'.1f", invoice->liters[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     entry_amount = GTK_WIDGET(gtk_builder_get_object(builder, "entry_amount"));
     g_signal_connect(entry_amount, "changed", G_CALLBACK(on_entry_double_changed), &invoice->total_amount[invoice->record_count]);
     buffer = gtk_entry_get_buffer(GTK_ENTRY(entry_amount));
-    snprintf(str_value, sizeof(str_value), "%.2f", invoice->total_amount[invoice->record_count - 1]);
+    snprintf(str_value, sizeof(str_value), "%'.2f", invoice->total_amount[invoice->record_count - 1]);
     gtk_entry_buffer_set_text(buffer, str_value, -1);
 
     // Cria GtkButton
@@ -131,36 +132,40 @@ static void activate(GApplication *app, gpointer user_data) {
     gtk_label_set_text(GTK_LABEL(final_date), invoiceReport.final_date);
 
     total_days = GTK_WIDGET(gtk_builder_get_object(builder, "total_days"));
-    snprintf(str_value, sizeof(str_value), "%d", invoiceReport.total_days);
+    snprintf(str_value, sizeof(str_value), "%'d", invoiceReport.total_days);
     gtk_label_set_text(GTK_LABEL(total_days), str_value);
 
     total_odometer = GTK_WIDGET(gtk_builder_get_object(builder, "total_odometer"));
-    snprintf(str_value, sizeof(str_value), "%d", invoiceReport.total_odometer);
+    snprintf(str_value, sizeof(str_value), "%'d", invoiceReport.total_odometer);
     gtk_label_set_text(GTK_LABEL(total_odometer), str_value);
 
     total_amount = GTK_WIDGET(gtk_builder_get_object(builder, "total_amount"));
-    snprintf(str_value, sizeof(str_value), "%.2f", invoiceReport.total_amount);
+    snprintf(str_value, sizeof(str_value), "%'.2f", invoiceReport.total_amount);
     gtk_label_set_text(GTK_LABEL(total_amount), str_value);
 
     total_liter = GTK_WIDGET(gtk_builder_get_object(builder, "total_liter"));
-    snprintf(str_value, sizeof(str_value), "%.1f", invoiceReport.total_liter);
+    snprintf(str_value, sizeof(str_value), "%'.1f", invoiceReport.total_liter);
     gtk_label_set_text(GTK_LABEL(total_liter), str_value);
 
     amount_per_day = GTK_WIDGET(gtk_builder_get_object(builder, "amount_per_day"));
-    snprintf(str_value, sizeof(str_value), "%.2f", invoiceReport.amount_per_day);
+    snprintf(str_value, sizeof(str_value), "%'.2f", invoiceReport.amount_per_day);
     gtk_label_set_text(GTK_LABEL(amount_per_day), str_value);
 
     amount_per_km = GTK_WIDGET(gtk_builder_get_object(builder, "amount_per_km"));
-    snprintf(str_value, sizeof(str_value), "%.2f", invoiceReport.amount_per_km);
+    snprintf(str_value, sizeof(str_value), "%'.2f", invoiceReport.amount_per_km);
     gtk_label_set_text(GTK_LABEL(amount_per_km), str_value);
 
     km_per_day = GTK_WIDGET(gtk_builder_get_object(builder, "km_per_day"));
-    snprintf(str_value, sizeof(str_value), "%.2f", invoiceReport.km_per_day);
+    snprintf(str_value, sizeof(str_value), "%'.2f", invoiceReport.km_per_day);
     gtk_label_set_text(GTK_LABEL(km_per_day), str_value);
 
     km_per_liter = GTK_WIDGET(gtk_builder_get_object(builder, "km_per_liter"));
-    snprintf(str_value, sizeof(str_value), "%.2f", invoiceReport.km_per_liter);
+    snprintf(str_value, sizeof(str_value), "%'.2f", invoiceReport.km_per_liter);
     gtk_label_set_text(GTK_LABEL(km_per_liter), str_value);
+
+    label_record_count_2 = GTK_WIDGET(gtk_builder_get_object(builder, "label_record_count_2"));
+    snprintf(str_value, sizeof(str_value), "[%d] records", invoice->record_count);
+    gtk_label_set_text(GTK_LABEL(label_record_count_2), str_value);
 
     gtk_window_present(GTK_WINDOW (window));
 }

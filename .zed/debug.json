@@ -2,19 +2,18 @@
   {
     "adapter": "GDB",
     "label": "abastecimento_spin (GDB)",
+    "request": "launch",
     "program": "/home/alanpasi/dev/C_Language/Projects/abastecimento_spin_v2/build/bin/abastecimento_spin",
-    "cwd": "/home/alanpasi/dev/C_Language/Projects/abastecimento_spin_v2",
-    "args": [],
-    "env": {},
-    "stop_on_entry": true
+    "stopAtBeginningOfMainSubprogram": true,
+    "cwd": "/home/alanpasi/dev/C_Language/Projects/abastecimento_spin_v2"
   },
   {
     "adapter": "CodeLLDB",
     "label": "abastecimento_spin (CodeLLDB)",
+    "request": "launch",
+    "name": "abastecimento_spin (CodeLLDB)",
     "program": "/home/alanpasi/dev/C_Language/Projects/abastecimento_spin_v2/build/bin/abastecimento_spin",
-    "cwd": "/home/alanpasi/dev/C_Language/Projects/abastecimento_spin_v2",
-    "args": [],
-    "env": {},
-    "stop_on_entry": true
+    "stopOnEntry": true,
+    "cwd": "/home/alanpasi/dev/C_Language/Projects/abastecimento_spin_v2"
   }
 ]
